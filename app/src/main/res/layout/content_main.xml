@@ -67,6 +67,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="400dp"
+        android:background="@drawable/roundedbutton"
         android:text="Enter"
         app:layout_constraintStart_toStartOf="@+id/passTxt"
         app:layout_constraintTop_toBottomOf="@+id/passTxt" />
@@ -78,6 +79,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="450dp"
+        android:background="@drawable/roundedbutton"
         android:text="UPDATE"
         app:layout_constraintStart_toStartOf="@+id/passTxt"
         app:layout_constraintTop_toBottomOf="@+id/passTxt" />
@@ -89,6 +91,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="500dp"
+        android:background="@drawable/roundedbutton"
         android:text="DELETE"
         app:layout_constraintStart_toStartOf="@+id/passTxt"
         app:layout_constraintTop_toBottomOf="@+id/passTxt" />
@@ -100,6 +103,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="550dp"
+        android:background="@drawable/roundedbutton"
         android:text="View"
         app:layout_constraintStart_toStartOf="@+id/passTxt"
         app:layout_constraintTop_toBottomOf="@+id/passTxt" />
@@ -118,9 +122,10 @@
 
     <Button
         android:id="@+id/NextBtn"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="350dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="350dp"
+        android:background="@drawable/roundedbutton"
         android:text="NextPage" />
 </RelativeLayout>

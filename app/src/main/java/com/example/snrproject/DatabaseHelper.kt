@@ -13,25 +13,17 @@ class DatabaseHelper(context: Context?) :
         null,
         DATABASE_VERSION
     ) {
-    //var database: SQLiteDatabase
 
     /*
-     * Our onCreate() method.
-     * Called when the database is created for the first time. This is
-     * where the creation of tables and the initial population of the tables
-     * should happen.
+     * CREATE
      */
-
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " +
                 "AUTOINCREMENT,user TEXT,pass TEXT,location TEXT, url TEXT)")
     }
 
     /*
-     * Let's create Our onUpgrade method
-     * Called when the database needs to be upgraded. The implementation should
-     * use this method to drop tables, add tables, or do anything else it needs
-     * to upgrade to the new schema version.
+     * UPDATE
      */
     override fun onUpgrade(
         db: SQLiteDatabase,
@@ -42,9 +34,8 @@ class DatabaseHelper(context: Context?) :
         onCreate(db)
     }
 
-    /**
-     * Let's create our insertData() method.
-     * It Will insert data to SQLIte database.
+    /*
+     * INSERT
      */
     fun insertData(user: String, pass: String, location: String, url: String) {
         val db = this.writableDatabase
@@ -69,25 +60,42 @@ class DatabaseHelper(context: Context?) :
         return true
     }
 
-     //Let's create a function to delete a given row based on the id.
-
+    /*
+     * DELETE
+     */
     fun deleteData(id : String) : Int {
         val db = this.writableDatabase
         return db.delete(TABLE_NAME,"ID = ?", arrayOf(id))
     }
 
-    //The below getter property will return a Cursor containing our dataset.
-    val allData : Cursor
+    /*
+    * Returns a List<> of all Users
+    */
+    val allData : List<Users>
         get() {
             val db = this.writableDatabase
-            val res = db.rawQuery("SELECT * FROM " + TABLE_NAME, null)
-            return res
+            val list = ArrayList<Users>()
+            val cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null)
+            if (cursor != null) {
+                if (cursor.count > 0) {
+                    cursor.moveToFirst()
+                    do {
+                        val userID = cursor.getString(cursor.getColumnIndex("id"))
+                        val userName = cursor.getString(cursor.getColumnIndex("user"))
+                        val userPass = cursor.getString(cursor.getColumnIndex("pass"))
+                        val userLocation = cursor.getString(cursor.getColumnIndex("location"))
+                        val userURL = cursor.getString(cursor.getColumnIndex("url"))
+                        val user = Users(userID, userName, userPass, userLocation, userURL)
+                        list.add(user)
+                    } while (cursor.moveToNext())
+                }
+            }
+            return list
         }
     /*
-    * Let's create a companion object to hold our static fields.
+    * Companion object to hold static fields
     * A Companion object is an object that is common to all instances of a given
     * class.*/
-
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "login.db"
@@ -98,8 +106,4 @@ class DatabaseHelper(context: Context?) :
         private const val COLUMN_LOCATION = "location"
         private const val COLUMN_URL = "url"
     }
-
-   /* init {
-        database = writableDatabase
-    }*/
 }
