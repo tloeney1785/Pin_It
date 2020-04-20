@@ -2,14 +2,11 @@ package com.example.snrproject
 
 import android.os.Bundle
 import android.view.ViewGroup
-import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
-import com.google.android.material.snackbar.Snackbar
+import android.view.ViewGroup.LayoutParams.*
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.ImageView
-import android.widget.LinearLayout
+import android.widget.*
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_list_pics.*
-import kotlinx.android.synthetic.main.content_list_pics.*
 
 class ListPics : AppCompatActivity() {
     internal var dbHelper = DatabaseHelper(this)
