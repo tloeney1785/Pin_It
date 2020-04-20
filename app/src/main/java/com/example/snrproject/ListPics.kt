@@ -7,6 +7,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.*
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_list_pics.*
+import android.view.Gravity
+import android.R.attr.gravity
+import android.widget.LinearLayout
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 class ListPics : AppCompatActivity() {
     internal var dbHelper = DatabaseHelper(this)
@@ -22,7 +30,11 @@ class ListPics : AppCompatActivity() {
         val res = dbHelper.allData
         for (i in res.indices) {
             val image = ImageView(this)
-            image.layoutParams = ViewGroup.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+
+            // use layoutParams to set image styling
+            val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            layoutParams.gravity = Gravity.CENTER
+            image.setLayoutParams(layoutParams)
 
             image.load(res[i].userURL)
             layout.addView(image)
