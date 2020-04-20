@@ -13,6 +13,23 @@ class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
     // `internal` means a variable is visible within a given module.
     internal var dbHelper = DatabaseHelper(this)
+    
+    /*
+     * onCreate method.
+     */
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+        val res = dbHelper.allData
+        imageView1.load(res[0].userURL) // shows the first entry's img
+
+        handleInserts()
+        handleUpdates()
+        handleDeletes()
+        handleViewing()
+        handleNext()
+    }
 
     fun showToast(text: String){
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
@@ -38,23 +55,6 @@ class MainActivity : AppCompatActivity() {
         idTxt.setText("")
         locationTxt.setText("")
         urlTxt.setText("")
-    }
-
-    /*
-     * onCreate method.
-     */
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        val res = dbHelper.allData
-        imageView1.load(res[0].userURL) // shows the first entry's img
-
-        handleInserts()
-        handleUpdates()
-        handleDeletes()
-        handleViewing()
-        handleNext()
     }
 
     /*
