@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val res = dbHelper.allData
-        imageView1.load(res[0].userURL) // shows the first entry's img
 
         handleInserts()
         handleUpdates()
