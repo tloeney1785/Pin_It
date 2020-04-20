@@ -1,20 +1,12 @@
 package com.example.snrproject
 
 import android.os.Bundle
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.*
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.*
 import coil.api.load
-import kotlinx.android.synthetic.main.activity_list_pics.*
 import android.view.Gravity
-import android.R.attr.gravity
 import android.widget.LinearLayout
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
 
 class ListPics : AppCompatActivity() {
     internal var dbHelper = DatabaseHelper(this)
