@@ -1,36 +1,13 @@
 package com.example.snrproject
 
-import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
-import android.view.View
 import android.app.AlertDialog
 import android.content.Intent
+import android.os.Bundle
+import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
-import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import coil.Coil
-import coil.ImageLoader
-import coil.annotation.ExperimentalCoil
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
-import android.net.Uri
-import android.widget.ImageView
-import android.widget.LinearLayout
-import androidx.annotation.DrawableRes
-import coil.request.LoadRequestBuilder
-import coil.request.RequestDisposable
-import coil.transform.CircleCropTransformation
-import coil.util.CoilUtils
-import kotlinx.android.synthetic.main.content_list_pics.*
-import okhttp3.HttpUrl
-import java.io.File
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 
 class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
@@ -99,23 +76,10 @@ class MainActivity : AppCompatActivity() {
                 dbHelper.insertData(userTxt.text.toString(),passTxt.text.toString(),
                     locationTxt.text.toString(),urlTxt.text.toString())
                 clearEditTexts()
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 e.printStackTrace()
                 showToast(e.message.toString())
             }
-
-            val res = dbHelper.allData
-
-            val imageView = ImageView(this)
-            val imgResId = R.drawable.ic_launcher_background
-
-            var resId = imgResId
-            imageView.setImageResource(imgResId)
-
-            val linearLayout = findViewById<LinearLayout>(R.id.rootContainer)
-            // Add ImageView to LinearLayout
-            imageView.load(res[0].userURL)
-            linearLayout?.addView(imageView)
         }
     }
 
