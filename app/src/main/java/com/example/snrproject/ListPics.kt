@@ -14,7 +14,6 @@ class ListPics : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_pics)
-        setSupportActionBar(toolbar)
 
         /*
          * Load all images in list view
