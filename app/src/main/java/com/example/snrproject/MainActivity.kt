@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         handleUpdates()
         handleDeletes()
         handleViewing()
-        handleNext()
+        handleHome()
     }
 
     fun showToast(text: String){
@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-     * NEXT PAGE button clicked
+     * HOME PAGE button clicked
      */
-    fun handleNext() {
+    fun handleHome() {
         HomeBtn.setOnClickListener{
             val intent = Intent (this,ListPics::class.java)
             startActivity(intent)
