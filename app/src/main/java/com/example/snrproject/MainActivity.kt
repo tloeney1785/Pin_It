@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -60,7 +59,7 @@ class MainActivity : AppCompatActivity() {
      * NEXT PAGE button clicked
      */
     fun handleNext() {
-        NextBtn.setOnClickListener{
+        HomeBtn.setOnClickListener{
             val intent = Intent (this,ListPics::class.java)
             startActivity(intent)
         }
