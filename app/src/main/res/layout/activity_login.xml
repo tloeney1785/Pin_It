@@ -9,49 +9,60 @@
 
     <EditText
         android:id="@+id/username_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_white_button"
         android:ems="10"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
         android:hint="Username"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.536" />
+        app:layout_constraintVertical_bias="0.567" />
 
     <EditText
         android:id="@+id/email_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_white_button"
         android:ems="10"
+        android:fontFamily="@font/bold"
+        android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:text="leew886@gmail.com"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.43" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="300dp"
+        android:layout_height="35dp"
+        android:background="@drawable/rounded_white_button"
         android:ems="10"
+
+        android:fontFamily="@font/bold"
+        android:gravity="center"
         android:hint="Password"
         android:inputType="textPassword"
-        android:text="12345"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.647" />
+        app:layout_constraintVertical_bias="0.635" />
 
     <Button
         android:id="@+id/button_register"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="35dp"
         android:layout_marginStart="150dp"
         android:layout_marginLeft="150dp"
         android:layout_marginTop="29dp"
@@ -59,29 +70,29 @@
         android:layout_marginRight="150dp"
         android:layout_marginBottom="175dp"
         android:background="@drawable/rounded_button"
-        android:fontFamily="@font/regular"
+        android:fontFamily="@font/bold"
         android:text="Register"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/password_register"
-        app:layout_constraintVertical_bias="0.201"
+        app:layout_constraintVertical_bias="1.0"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/account_exist_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/navy"
         android:fontFamily="@font/light"
-        android:textSize="16sp"
         android:text="Already have an account?"
+        android:textColor="@color/navy"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/button_register"
-        app:layout_constraintHorizontal_bias="0.181"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_register"
-        app:layout_constraintVertical_bias="0.794" />
+        app:layout_constraintVertical_bias="0.911" />
 </androidx.constraintlayout.widget.ConstraintLayout>
