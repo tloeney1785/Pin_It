@@ -48,11 +48,14 @@ class ListPics : AppCompatActivity() {
             val user = TextView(this)
 
             // use layoutParams to set image styling
-            val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-            layoutParams.gravity = Gravity.CENTER
-            image.setLayoutParams(layoutParams)
-            user.setLayoutParams(layoutParams)
+            val imgLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val usrTxtLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
 
+            imgLayoutParams.gravity = Gravity.CENTER
+            usrTxtLayoutParams.gravity = Gravity.LEFT
+
+            image.setLayoutParams(imgLayoutParams)
+            user.setLayoutParams(usrTxtLayoutParams)
 
             image.load(res[i].userURL)
             user.text = res[i].userName
