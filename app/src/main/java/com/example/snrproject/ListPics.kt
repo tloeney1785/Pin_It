@@ -44,23 +44,24 @@ class ListPics : AppCompatActivity() {
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbHelper.allData
         for (i in res.indices) {
-            val image = ImageView(this)
             val user = TextView(this)
+            val image = ImageView(this)
 
             // use layoutParams to set image styling
-            val imgLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             val usrTxtLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val imgLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
 
-            imgLayoutParams.gravity = Gravity.CENTER
             usrTxtLayoutParams.gravity = Gravity.LEFT
+            imgLayoutParams.gravity = Gravity.CENTER
 
-            image.setLayoutParams(imgLayoutParams)
             user.setLayoutParams(usrTxtLayoutParams)
+            image.setLayoutParams(imgLayoutParams)
 
-            image.load(res[i].userURL)
             user.text = res[i].userName
-            layout.addView(image)
+            image.load(res[i].userURL)
+
             layout.addView(user)
+            layout.addView(image)
         }
     }
 }
