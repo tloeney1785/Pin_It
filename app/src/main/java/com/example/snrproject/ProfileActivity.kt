@@ -12,12 +12,12 @@ import android.widget.LinearLayout
 
 class ProfileActivity : AppCompatActivity(){
 
-    internal var dbHelper = DatabaseHelper(this)
+    private var dbHelper = DatabaseHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_list_pics)
+        setupButtons()
 
         /*
          * Load all images in list view
@@ -43,7 +43,9 @@ class ProfileActivity : AppCompatActivity(){
                 layout.addView(user)
             }
         }
+    }
 
+    private fun setupButtons(){
         btnProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }

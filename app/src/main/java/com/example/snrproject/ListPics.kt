@@ -8,16 +8,36 @@ import coil.api.load
 import kotlinx.android.synthetic.main.activity_list_pics.*
 import android.view.Gravity
 import android.content.Intent
+import android.util.Log
 import android.widget.LinearLayout
 
 
 class ListPics : AppCompatActivity() {
-    internal var dbHelper = DatabaseHelper(this)
+    private var dbHelper = DatabaseHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_list_pics)
+        setupButtons()
+        loadImages()
+    }
 
+    //setup Home, Profile and Upload buttons
+     private fun setupButtons(){
+        btnProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
+
+        btnHome.setOnClickListener {
+            startActivity(Intent(this, ListPics::class.java))
+        }
+
+        btnUpload.setOnClickListener {
+            startActivity((Intent(this, MainActivity::class.java)))
+        }
+    }
+    //load images from database
+    private fun loadImages(){
         /*
          * Load all images in list view
          */
@@ -33,22 +53,12 @@ class ListPics : AppCompatActivity() {
             image.setLayoutParams(layoutParams)
             user.setLayoutParams(layoutParams)
 
+
             image.load(res[i].userURL)
             user.text = res[i].userName
             layout.addView(image)
             layout.addView(user)
         }
-
-        btnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
-
-        btnHome.setOnClickListener {
-            startActivity(Intent(this, ListPics::class.java))
-        }
-
-        btnUpload.setOnClickListener {
-            startActivity((Intent(this, MainActivity::class.java)))
-        }
     }
 }
+
