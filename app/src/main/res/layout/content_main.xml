@@ -116,4 +116,13 @@
         android:layout_marginTop="350dp"
         android:background="@drawable/roundedbutton"
         android:text="Home" />
+
+    <Button
+        android:id="@+id/LogoutBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="310dp"
+        android:layout_marginTop="675dp"
+        android:background="@drawable/roundedbutton"
+        android:text="Sign Out" />
 </RelativeLayout>

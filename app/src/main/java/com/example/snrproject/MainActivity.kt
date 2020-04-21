@@ -25,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         handleDeletes()
         handleViewing()
         handleHome()
+        LogoutBtn.setOnClickListener {
+            startActivity((Intent(this, Login::class.java)))
+        }
     }
 
     private fun showToast(text: String){
