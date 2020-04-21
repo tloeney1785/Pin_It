@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
         handleDeletes()
         handleViewing()
         handleNext()
-        loginBtn.setOnClickListener {
-            startActivity((Intent(this, LoginPage::class.java)))
-        }
     }
 
     fun showToast(text: String){
