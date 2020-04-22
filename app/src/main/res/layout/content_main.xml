@@ -8,85 +8,31 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <!--    WRAPPER-->
-    <LinearLayout
+    <!--        INPUT FIELDS-->
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/urlTxt"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:hint="Image URL"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!--        INPUT FIELDS-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center|top"
-            android:orientation="vertical">
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/locationTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Location"
+        app:layout_constraintTop_toBottomOf="@id/urlTxt"/>
 
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/urlTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="url" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/locationTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Location" />
-        </LinearLayout>
-
-        <!--        IMAGE PREVIEW-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imagePreview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <!--        BUTTONS-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginBottom="20dp"
-            android:layout_weight="1"
-            android:gravity="center|bottom"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/insertBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:text="Post"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/HomeBtn"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/HomeBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:text="Home"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/viewBtn"
-                app:layout_constraintStart_toEndOf="@+id/insertBtn" />
-
-            <Button
-                android:id="@+id/LogoutBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Log Out" />
-
-        </LinearLayout>
-    </LinearLayout>
+    <!--        IMAGE PREVIEW-->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/locationTxt"
+        app:layout_constraintBottom_toTopOf="@+id/HomeBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
