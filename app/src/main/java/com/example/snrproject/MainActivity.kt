@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
-
     /*
      * onCreate method.
      */
