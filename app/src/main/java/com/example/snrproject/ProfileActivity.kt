@@ -1,6 +1,5 @@
 package com.example.snrproject
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup.LayoutParams.*
@@ -9,73 +8,40 @@ import coil.api.load
 import kotlinx.android.synthetic.main.activity_list_pics.*
 import android.view.Gravity
 import android.content.Intent
-import android.util.Log
 import android.widget.LinearLayout
-import kotlinx.android.synthetic.main.activity_list_pics.btnHome
-import kotlinx.android.synthetic.main.activity_list_pics.btnProfile
-import kotlinx.android.synthetic.main.activity_list_pics.btnUpload
-import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity(){
 
     private var dbHelper = DatabaseHelper(this)
-    private val username = "Matt.ako"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_profile)
-
+        setContentView(R.layout.activity_list_pics)
         setupButtons()
-        profilenameTxt.text = username
-        listPhotos()
 
-        profilePictureBtn.setOnClickListener(){
-            Log.d("profileactivity", "Profile picture select")
-            val intent = Intent(Intent.ACTION_PICK)
-            intent.type = "image/*"
-            startActivityForResult(intent, 0)
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            //proceed and check waht the selected was
-            Log.d("ProfileActivity", "Photo was selected")
-        }
-
-    }
-
-    private fun listPhotos(){
         /*
-        * Load all images in list view
-        */
-
-        val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+         * Load all images in list view
+         */
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbHelper.allData
-
         for (i in res.indices) {
             val image = ImageView(this)
             val user = TextView(this)
 
             // use layoutParams to set image styling
-
-            layoutParams.gravity = Gravity.CENTER_HORIZONTAL
-
+            val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            layoutParams.gravity = Gravity.CENTER
             image.setLayoutParams(layoutParams)
             user.setLayoutParams(layoutParams)
 
             //filter by profile
-            if(res[i].userName==username){
+            if(res[i].userName=="Matt.ako"){
                 //load image and username
                 image.load(res[i].userURL)
                 user.text = res[i].userName
                 layout.addView(image)
                 layout.addView(user)
             }
-
         }
     }
 
