@@ -17,7 +17,7 @@ class ImageDatabase(context: Context?) :
      * CREATE
      */
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " + "AUTOINCREMENT,location TEXT, url TEXT)")
+        db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " + "AUTOINCREMENT,user TEXT, location TEXT, url TEXT)")
     }
 
     /*
@@ -35,19 +35,21 @@ class ImageDatabase(context: Context?) :
     /*
      * INSERT
      */
-    fun insertData(location: String, url: String) {
+    fun insertData(user: String, location: String, url: String) {
         val db = this.writableDatabase
         val contentValues = ContentValues()
+        contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_LOCATION, location)
         contentValues.put(COLUMN_URL, url)
         db.insert(TABLE_NAME, null, contentValues)
     }
     //Let's create  a method to update a row with new field values.
-    fun updateData(id: String, location: String, url: String):
+    fun updateData(user: String, id: String, location: String, url: String):
             Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_ID, id)
+        contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_LOCATION, location)
         contentValues.put(COLUMN_URL, url)
         db.update(TABLE_NAME, contentValues, "ID = ?", arrayOf(id))
@@ -75,6 +77,7 @@ class ImageDatabase(context: Context?) :
                     cursor.moveToFirst()
                     do {
                         val userID = cursor.getString(cursor.getColumnIndex("id"))
+                        val userName = cursor.getString(cursor.getColumnIndex("user"))
                         val userLocation = cursor.getString(cursor.getColumnIndex("location"))
                         val userURL = cursor.getString(cursor.getColumnIndex("url"))
                         val user = Images(userID, userLocation, userURL)
@@ -93,6 +96,7 @@ class ImageDatabase(context: Context?) :
         private const val DATABASE_NAME = "images.db"
         private const val TABLE_NAME = "imgdata"
         private const val COLUMN_ID = "id"
+        private const val COLUMN_USER = "user"
         private const val COLUMN_LOCATION = "location"
         private const val COLUMN_URL = "url"
     }
