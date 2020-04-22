@@ -6,7 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
+import androidx.core.os.HandlerCompat.postDelayed
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.os.Handler
+
 
 class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
@@ -19,6 +26,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // constantly update image preview by checking urlTxt
+        val handler = Handler()
+        handler.post(object : Runnable {
+            override fun run() {
+                imagePreview.load(urlTxt.text.toString())
+                handler.postDelayed(this, 500) // interval time for refresh
+            }
+        })
 
         handleInserts()
         handleUpdates()
