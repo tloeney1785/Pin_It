@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         getLocation() // call this in handleInserts() to put location in database automatically
-        handleInserts()
+        handleInserts(username)
         //handleUpdates()
         //handleDeletes()
         // handleViewing()
@@ -149,10 +149,10 @@ class MainActivity : AppCompatActivity() {
     /*
      * ENTER button clicked
      */
-    private fun handleInserts() {
+    private fun handleInserts(username:String) {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData("",locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData(username,locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
