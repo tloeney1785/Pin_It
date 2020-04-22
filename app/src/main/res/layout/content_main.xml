@@ -93,9 +93,15 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/roundedbutton"
                 android:text="Home"
-                app:layout_constraintStart_toEndOf="@+id/insertBtn"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/viewBtn"
-                app:layout_constraintBottom_toBottomOf="parent" />
+                app:layout_constraintStart_toEndOf="@+id/insertBtn" />
+
+            <Button
+                android:id="@+id/LogoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Log Out" />
 
         </LinearLayout>
     </LinearLayout>

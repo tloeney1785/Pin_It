@@ -13,7 +13,7 @@ import android.widget.LinearLayout
 
 
 class ListPics : AppCompatActivity() {
-    private var dbHelper = DatabaseHelper(this)
+    private var dbImages = ImageDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +35,7 @@ class ListPics : AppCompatActivity() {
         btnUpload.setOnClickListener {
             startActivity((Intent(this, MainActivity::class.java)))
         }
+
     }
     //load images from database
     private fun loadImages(){
@@ -42,7 +43,7 @@ class ListPics : AppCompatActivity() {
          * Load all images in list view
          */
         val layout: LinearLayout = findViewById(R.id.rootContainer)
-        val res = dbHelper.allData
+        val res = dbImages.allData
         for (i in res.indices) {
             val image = ImageView(this)
             val user = TextView(this)

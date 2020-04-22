@@ -18,7 +18,7 @@ import android.os.Handler
 class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
     // `internal` means a variable is visible within a given module.
-    internal var dbHelper = DatabaseHelper(this)
+    //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
 
     /*
@@ -42,6 +42,9 @@ class MainActivity : AppCompatActivity() {
         //handleDeletes()
        // handleViewing()
         handleHome()
+        LogoutBtn.setOnClickListener {
+            startActivity(Intent(this, Login::class.java))
+        }
     }
 
     private fun showToast(text: String){
@@ -85,7 +88,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleInserts() {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData(userTxt.text.toString(),locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
