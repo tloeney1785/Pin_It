@@ -11,8 +11,6 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_page)
 
-        var gClass = GlobalVariable()
-
         back_to_register_textview.setOnClickListener{
 
             val intent = Intent(this, RegisterActivity::class.java)
@@ -20,8 +18,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginBtn.setOnClickListener(){
-            gClass.globalUser = login_username_edittext.text.toString()
-            startActivity(Intent(this, ListPics::class.java))
+            val intent = Intent(this, ListPics::class.java)
+            intent.putExtra("username",login_username_edittext.text.toString())
+            startActivity(intent)
         }
     }
 

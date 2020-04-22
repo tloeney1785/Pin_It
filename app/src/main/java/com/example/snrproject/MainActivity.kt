@@ -36,6 +36,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val username = intent.getStringExtra("username")
 
         // constantly update image preview by checking urlTxt
         val handler = Handler()
@@ -45,7 +46,6 @@ class MainActivity : AppCompatActivity() {
                 handler.postDelayed(this, 500) // interval time for refresh
             }
         })
-
         // handle location
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (!checkPermission(permissions)) {
@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         //handleUpdates()
         //handleDeletes()
         // handleViewing()
-        handleHome()
+        handleHome(username)
         LogoutBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
@@ -137,9 +137,11 @@ class MainActivity : AppCompatActivity() {
     /*
      * HOME PAGE button clicked
      */
-    private fun handleHome() {
+    private fun handleHome(username:String) {
         HomeBtn.setOnClickListener{
-            startActivity(Intent(this, ListPics::class.java))
+            val intent = Intent(this, ListPics::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
         }
     }
 

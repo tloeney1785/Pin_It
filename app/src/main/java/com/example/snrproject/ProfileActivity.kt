@@ -1,13 +1,13 @@
 package com.example.snrproject
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup.LayoutParams.*
 import android.widget.*
 import coil.api.load
 import android.view.Gravity
-import android.content.Intent
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.LinearLayout
@@ -21,16 +21,15 @@ class ProfileActivity : AppCompatActivity(){
 
     private var dbHelper = DatabaseHelper(this)
     private var dbImages = ImageDatabase(this)
-    var gClass = GlobalVariable()
-    private val username = "${gClass.globalUser}"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        setupButtons()
+        val username = intent.getStringExtra("username")
         profilenameTxt.text = username
-        //listPhotos()
+        setupButtons(username)
+        //listPhotos(username)
 
         profilePictureBtn.setOnClickListener(){
             Log.d("profileactivity", "Profile picture select")
@@ -57,7 +56,7 @@ class ProfileActivity : AppCompatActivity(){
 
     }
 
-    private fun listPhotos(){
+    private fun listPhotos(username:String){
         /*
         * Load all images in list view
         */
@@ -89,17 +88,23 @@ class ProfileActivity : AppCompatActivity(){
         }
     }
 
-    private fun setupButtons(){
-        btnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
-        }
+        private fun setupButtons(username:String){
+            btnProfile.setOnClickListener {
+                val intent = Intent(this, ProfileActivity::class.java)
+                intent.putExtra("username",username)
+                startActivity(intent)
+            }
 
-        btnHome.setOnClickListener {
-            startActivity(Intent(this, ListPics::class.java))
-        }
+            btnHome.setOnClickListener {
+                val intent = Intent(this, ListPics::class.java)
+                intent.putExtra("username",username)
+                startActivity(intent)
+            }
 
         btnUpload.setOnClickListener {
-            startActivity((Intent(this, MainActivity::class.java)))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
         }
     }
 }

@@ -10,6 +10,7 @@ import android.view.Gravity
 import android.content.Intent
 import android.util.Log
 import android.widget.LinearLayout
+import kotlinx.android.synthetic.main.activity_login_page.*
 
 
 class ListPics : AppCompatActivity() {
@@ -17,23 +18,30 @@ class ListPics : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val username = intent.getStringExtra("username")
         setContentView(R.layout.activity_list_pics)
-        setupButtons()
+        setupButtons(username)
         loadImages()
     }
 
     //setup Home, Profile and Upload buttons
-     private fun setupButtons(){
+     private fun setupButtons(username:String){
         btnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfileActivity::class.java))
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
         }
 
         btnHome.setOnClickListener {
-            startActivity(Intent(this, ListPics::class.java))
+            val intent = Intent(this, ListPics::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
         }
 
         btnUpload.setOnClickListener {
-            startActivity((Intent(this, MainActivity::class.java)))
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
         }
 
     }
