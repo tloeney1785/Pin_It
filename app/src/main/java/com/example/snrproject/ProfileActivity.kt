@@ -63,9 +63,9 @@ class ProfileActivity : AppCompatActivity(){
         val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbHelper.allData
-        val resimg = dbImages.allData
+        val res1 = dbImages.allData
 
-        for (i in res.indices) {
+        for (i in res1.indices) {
             val image = ImageView(this)
             val user = TextView(this)
 
@@ -79,7 +79,7 @@ class ProfileActivity : AppCompatActivity(){
             //filter by profile
             if(res[i].userName==username){
                 //load image and username
-                image.load(resimg[i].userURL)
+                image.load(res1[i].userURL)
                 user.text = res[i].userName
                 layout.addView(image)
                 layout.addView(user)
