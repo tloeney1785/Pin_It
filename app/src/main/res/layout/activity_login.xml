@@ -46,7 +46,6 @@
         android:layout_height="35dp"
         android:background="@drawable/rounded_white_button"
         android:ems="10"
-
         android:fontFamily="@font/bold"
         android:gravity="center"
         android:hint="Password"
@@ -56,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.635" />
+        app:layout_constraintVertical_bias="0.635"/>
 
     <Button
         android:id="@+id/button_register"
