@@ -18,7 +18,7 @@ import android.os.Handler
 class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
     // `internal` means a variable is visible within a given module.
-    internal var dbHelper = DatabaseHelper(this)
+    //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
 
     /*
