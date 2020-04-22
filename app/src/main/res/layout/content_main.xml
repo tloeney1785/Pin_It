@@ -23,23 +23,6 @@
             android:gravity="center|top"
             android:orientation="vertical">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/idTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="ID" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Username" />
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/passTxt"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Password" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/urlTxt"
