@@ -24,25 +24,24 @@ class Login : AppCompatActivity() {
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
 
-<<<<<<< HEAD
+
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(){
                     if(!it.isSuccessful)
                         return@addOnCompleteListener
                 }
-=======
+
            // dbUsers.insertData(username,password,email)
         }
->>>>>>> 43ece7bc3b7eb8fd96d6ef8a47cfa94f2e99fb38
 
-
-        }
         account_exist_textview.setOnClickListener{
-            Log.d("Login","Try to show login activity")
 
             //launch the login activity
             val intent = Intent(this, LoginPage::class.java)
             startActivity(intent)
         }
+        }
+
+
     }
-}
+
