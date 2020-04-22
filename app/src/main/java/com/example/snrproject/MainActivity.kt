@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -21,23 +20,24 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val res = dbHelper.allData
-
         handleInserts()
         handleUpdates()
         handleDeletes()
         handleViewing()
-        handleNext()
+        handleHome()
+        LogoutBtn.setOnClickListener {
+            startActivity((Intent(this, Login::class.java)))
+        }
     }
 
-    fun showToast(text: String){
+    private fun showToast(text: String){
         Toast.makeText(this@MainActivity, text, Toast.LENGTH_LONG).show()
     }
 
     /*
      * Alert dialog with data dialog
      */
-    fun showDialog(title : String,Message : String){
+    private fun showDialog(title : String,Message : String){
         val builder = AlertDialog.Builder(this)
         builder.setCancelable(true)
         builder.setTitle(title)
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     /*
      * Clear editable text
      */
-    fun clearEditTexts(){
+    private fun clearEditTexts(){
         userTxt.setText("")
         passTxt.setText("")
         idTxt.setText("")
@@ -57,23 +57,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*
-     * NEXT PAGE button clicked
+     * HOME PAGE button clicked
      */
-    fun handleNext() {
-        NextBtn.setOnClickListener{
-            val intent = Intent (this,ListPics::class.java)
-            startActivity(intent)
+    private fun handleHome() {
+        HomeBtn.setOnClickListener{
+            startActivity(Intent(this, ListPics::class.java))
         }
     }
 
     /*
      * ENTER button clicked
      */
-    fun handleInserts() {
+    private fun handleInserts() {
         insertBtn.setOnClickListener {
             try {
-                dbHelper.insertData(userTxt.text.toString(),passTxt.text.toString(),
-                    locationTxt.text.toString(),urlTxt.text.toString())
+                dbHelper.insertData(userTxt.text.toString(), passTxt.text.toString(),
+                    locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -85,13 +84,16 @@ class MainActivity : AppCompatActivity() {
     /*
      * UPDATE button clicked
      */
-    fun handleUpdates() {
+    private fun handleUpdates() {
         updateBtn.setOnClickListener {
             try {
-                val isUpdate = dbHelper.updateData(idTxt.text.toString(),
+                val isUpdate = dbHelper.updateData(
+                    idTxt.text.toString(),
                     userTxt.text.toString(),
-                    passTxt.text.toString(), locationTxt.text.toString(),urlTxt.text.toString())
-                if (isUpdate == true)
+                    passTxt.text.toString(),
+                    locationTxt.text.toString(),
+                    urlTxt.text.toString())
+                if (isUpdate)
                     showToast("Data Updated Successfully")
                 else
                     showToast("Data Not Updated")
@@ -105,12 +107,12 @@ class MainActivity : AppCompatActivity() {
     /*
      * DELETE button clicked
      */
-    fun handleDeletes(){
+    private fun handleDeletes(){
         deleteBtn.setOnClickListener {
             try {
                 dbHelper.deleteData(idTxt.text.toString())
                 clearEditTexts()
-            }catch (e: Exception){
+            } catch (e: Exception){
                 e.printStackTrace()
                 showToast(e.message.toString())
             }
@@ -120,7 +122,7 @@ class MainActivity : AppCompatActivity() {
     /*
      * VIEW button clicked
      */
-    fun handleViewing() {
+    private fun handleViewing() {
         viewBtn.setOnClickListener(
             View.OnClickListener {
                 val res = dbHelper.allData

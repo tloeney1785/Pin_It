@@ -23,7 +23,7 @@ class ListPics : AppCompatActivity() {
     }
 
     //setup Home, Profile and Upload buttons
-     private fun setupButtons(){
+    private fun setupButtons(){
         btnProfile.setOnClickListener {
             startActivity(Intent(this, ProfileActivity::class.java))
         }
@@ -44,20 +44,24 @@ class ListPics : AppCompatActivity() {
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbHelper.allData
         for (i in res.indices) {
-            val image = ImageView(this)
             val user = TextView(this)
+            val image = ImageView(this)
 
             // use layoutParams to set image styling
-            val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-            layoutParams.gravity = Gravity.CENTER
-            image.setLayoutParams(layoutParams)
-            user.setLayoutParams(layoutParams)
+            val usrTxtLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val imgLayoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
 
+            usrTxtLayoutParams.gravity = Gravity.LEFT
+            imgLayoutParams.gravity = Gravity.CENTER
 
-            image.load(res[i].userURL)
+            user.setLayoutParams(usrTxtLayoutParams)
+            image.setLayoutParams(imgLayoutParams)
+
             user.text = res[i].userName
-            layout.addView(image)
+            image.load(res[i].userURL)
+
             layout.addView(user)
+            layout.addView(image)
         }
     }
 }

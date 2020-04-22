@@ -15,6 +15,7 @@
 
     <Button
         android:id="@+id/btnProfile"
+        android:background="@drawable/roundedbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -25,6 +26,7 @@
 
     <Button
         android:id="@+id/btnHome"
+        android:background="@drawable/roundedbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -35,6 +37,7 @@
 
     <Button
         android:id="@+id/btnUpload"
+        android:background="@drawable/roundedbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
