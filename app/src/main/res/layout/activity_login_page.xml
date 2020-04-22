@@ -4,17 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage"
+    tools:context=".LoginActivity"
     android:background="@drawable/login_backdrop">
 
     <Button
-        android:id="@+id/login_page_button"
+        android:id="@+id/loginBtn"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
-        android:layout_marginBottom="172dp"
+        android:layout_marginBottom="188dp"
         android:background="@drawable/rounded_button"
-        android:fontFamily="@font/regular"
-        android:text="LOGIN"
+        android:text="Login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -22,20 +21,22 @@
         app:layout_constraintTop_toBottomOf="@+id/password_register"
         app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
+    <Button
         android:id="@+id/back_to_register_textview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back to Register"
-        android:fontFamily="@font/bold"
+        android:layout_width="197dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded_button"
+        android:backgroundTint="@color/colorAccent"
+        android:text="Register"
         android:textColor="@color/black"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.977" />
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/login_email_edittext"
@@ -43,7 +44,6 @@
         android:layout_height="35dp"
         android:background="@drawable/rounded_white_button"
         android:ems="10"
-        android:fontFamily="@font/bold"
         android:gravity="center"
         android:hint="Email"
         android:inputType="textEmailAddress"
@@ -59,7 +59,6 @@
         android:layout_height="35dp"
         android:background="@drawable/rounded_white_button"
         android:ems="10"
-        android:fontFamily="@font/bold"
         android:gravity="center"
         android:hint="Password"
         android:inputType="textPassword"
@@ -76,7 +75,6 @@
         android:layout_height="35dp"
         android:background="@drawable/rounded_white_button"
         android:ems="10"
-        android:fontFamily="@font/bold"
         android:gravity="center"
         android:hint="Username"
         android:inputType="textPersonName"

@@ -3,15 +3,10 @@ package com.example.snrproject
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
-import androidx.core.os.HandlerCompat.postDelayed
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Handler
 
 
@@ -43,7 +38,7 @@ class MainActivity : AppCompatActivity() {
        // handleViewing()
         handleHome()
         LogoutBtn.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 
