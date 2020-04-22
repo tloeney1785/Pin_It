@@ -5,6 +5,8 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_login.*
 import android.util.Log
 import android.content.Intent
+import com.google.firebase.auth.FirebaseAuth
+
 
 class Login : AppCompatActivity() {
 
@@ -20,8 +22,14 @@ class Login : AppCompatActivity() {
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
 
-        }
+            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(){
+                    if(!it.isSuccessful)
+                        return@addOnCompleteListener
+                }
 
+
+        }
         account_exist_textview.setOnClickListener{
             Log.d("Login","Try to show login activity")
 
