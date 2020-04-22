@@ -21,7 +21,8 @@ class ProfileActivity : AppCompatActivity(){
 
     private var dbHelper = DatabaseHelper(this)
     private var dbImages = ImageDatabase(this)
-    private val username = login_username_edittext.toString()
+    //var gClass = GlobalVariable()
+    private val username = ""//gClass.globalUser
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
