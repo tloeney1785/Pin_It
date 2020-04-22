@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_profile.*
 class ProfileActivity : AppCompatActivity(){
 
     private var dbHelper = DatabaseHelper(this)
+    private var dbImages = ImageDatabase(this)
     private val username = "Matt.ako"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +56,7 @@ class ProfileActivity : AppCompatActivity(){
         val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbHelper.allData
+        val resimg = dbImages.allData
 
         for (i in res.indices) {
             val image = ImageView(this)
@@ -70,7 +72,7 @@ class ProfileActivity : AppCompatActivity(){
             //filter by profile
             if(res[i].userName==username){
                 //load image and username
-                image.load(res[i].userURL)
+                image.load(resimg[i].userURL)
                 user.text = res[i].userName
                 layout.addView(image)
                 layout.addView(user)
