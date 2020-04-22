@@ -66,9 +66,6 @@ class MainActivity : AppCompatActivity() {
      * Clear editable text
      */
     private fun clearEditTexts(){
-        userTxt.setText("")
-        passTxt.setText("")
-        idTxt.setText("")
         locationTxt.setText("")
         urlTxt.setText("")
     }
@@ -88,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleInserts() {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(userTxt.text.toString(),locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData("",locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
