@@ -20,8 +20,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         loginBtn.setOnClickListener(){
+            gClass.globalUser = login_username_edittext.text.toString()
             startActivity(Intent(this, ListPics::class.java))
-            gClass.setUser(login_username_edittext.text.toString())
         }
     }
 
