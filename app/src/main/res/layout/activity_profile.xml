@@ -47,15 +47,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/btnProfile" />
 
-    <ImageView
+    <Button
         android:id="@+id/profilePictureBtn"
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="25dp"
+        android:background="@drawable/rounded_profile_picture"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:text="Select Photo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/rounded_profile_picture" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:id="@+id/selectphoto_imageview_register"
+        app:layout_constraintBottom_toBottomOf="@+id/profilePictureBtn"
+        app:layout_constraintEnd_toEndOf="@+id/profilePictureBtn"
+        app:layout_constraintStart_toStartOf="@+id/profilePictureBtn"
+        app:layout_constraintTop_toTopOf="@+id/profilePictureBtn" />
 
     <TextView
         android:id="@+id/profilenameTxt"

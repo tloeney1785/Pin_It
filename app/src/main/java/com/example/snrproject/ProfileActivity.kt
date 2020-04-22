@@ -6,9 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup.LayoutParams.*
 import android.widget.*
 import coil.api.load
-import kotlinx.android.synthetic.main.activity_list_pics.*
 import android.view.Gravity
 import android.content.Intent
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_list_pics.btnHome
@@ -43,6 +43,13 @@ class ProfileActivity : AppCompatActivity(){
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
             //proceed and check waht the selected was
             Log.d("ProfileActivity", "Photo was selected")
+
+            val uri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            selectphoto_imageview_register.setImageBitmap(bitmap)
+            profilePictureBtn.alpha = 0f
+            //val bitmapDrawable = BitmapDrawable(bitmap)
+            //profilePictureBtn.setBackgroundDrawable(bitmapDrawable)
         }
 
     }
