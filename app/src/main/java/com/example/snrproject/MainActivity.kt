@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                             locationGps = location
                             Log.d("CodeAndroidLocation", " GPS Latitude : " + locationGps!!.latitude)
                             Log.d("CodeAndroidLocation", " GPS Longitude : " + locationGps!!.longitude)
-//                            locationTxt.hint = " GPS Latitude : " + locationGps!!.latitude
+                            locationTxt.hint = " GPS Latitude : " + locationGps!!.latitude
                         }
                     }
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
