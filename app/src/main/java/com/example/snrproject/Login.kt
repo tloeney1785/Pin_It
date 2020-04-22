@@ -20,6 +20,8 @@ class Login : AppCompatActivity() {
         button_register.setOnClickListener{
             val email = email_register.text.toString()
             val password = password_register.text.toString()
+            val username = username_register.text.toString()
+            dbUsers.insertData(username,password,email)
 
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
@@ -31,7 +33,6 @@ class Login : AppCompatActivity() {
                         return@addOnCompleteListener
                 }
 
-           // dbUsers.insertData(username,password,email)
         }
 
         account_exist_textview.setOnClickListener{
@@ -41,7 +42,5 @@ class Login : AppCompatActivity() {
             startActivity(intent)
         }
         }
-
-
     }
 
