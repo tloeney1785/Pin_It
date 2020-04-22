@@ -35,6 +35,7 @@ class ListPics : AppCompatActivity() {
         btnUpload.setOnClickListener {
             startActivity((Intent(this, MainActivity::class.java)))
         }
+
     }
     //load images from database
     private fun loadImages(){
