@@ -22,7 +22,7 @@ class ProfileActivity : AppCompatActivity(){
     private var dbHelper = DatabaseHelper(this)
     private var dbImages = ImageDatabase(this)
     var gClass = GlobalVariable()
-    private val username = gClass.globalUser
+    private val username = gClass.getUser()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +30,7 @@ class ProfileActivity : AppCompatActivity(){
 
         setupButtons()
         profilenameTxt.text = username
-        listPhotos()
+        //listPhotos()
 
         profilePictureBtn.setOnClickListener(){
             Log.d("profileactivity", "Profile picture select")
