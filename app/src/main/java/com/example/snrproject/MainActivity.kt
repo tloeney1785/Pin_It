@@ -8,13 +8,30 @@ import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
 import android.os.Handler
+import android.Manifest
+import android.location.LocationListener
+import android.location.LocationManager
+import android.location.Location
+import android.annotation.SuppressLint
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Log
+import android.provider.Settings
 
+private const val PERMISSION_REQUEST = 10
 
 class MainActivity : AppCompatActivity() {
+    lateinit var locationManager: LocationManager
+    private var hasGps = false
+    private var hasNetwork = false
+    private var locationGps: Location? = null
+    private var locationNetwork: Location? = null
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
     // `internal` means a variable is visible within a given module.
     //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
+    private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
     /*
      * onCreate method.
@@ -32,6 +49,14 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
+        // handle location
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!checkPermission(permissions)) {
+                requestPermissions(permissions, PERMISSION_REQUEST)
+            }
+        }
+
+        getLocation() // call this in handleInserts() to put location in database automatically
         handleInserts()
         //handleUpdates()
         //handleDeletes()
@@ -39,6 +64,67 @@ class MainActivity : AppCompatActivity() {
         handleHome()
         LogoutBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun getLocation() {
+        locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+
+        if (hasGps || hasNetwork) {
+            if (hasGps) {
+                Log.d("CodeAndroidLocation", "hasGps")
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0F, object : LocationListener {
+                    override fun onLocationChanged(location: Location?) {
+                        if (location != null) {
+                            locationGps = location
+                            Log.d("CodeAndroidLocation", " GPS Latitude : " + locationGps!!.latitude)
+                            Log.d("CodeAndroidLocation", " GPS Longitude : " + locationGps!!.longitude)
+//                            locationTxt.hint = " GPS Latitude : " + locationGps!!.latitude
+                        }
+                    }
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+                    override fun onProviderEnabled(provider: String?) {}
+                    override fun onProviderDisabled(provider: String?) {}
+                })
+
+                val localGpsLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+                if (localGpsLocation != null)
+                    locationGps = localGpsLocation
+            }
+            if (hasNetwork) {
+                Log.d("CodeAndroidLocation", "hasGps")
+                locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 0F, object : LocationListener {
+                    override fun onLocationChanged(location: Location?) {
+                        if (location != null) {
+                            locationNetwork = location
+                            Log.d("CodeAndroidLocation", " Network Latitude : " + locationNetwork!!.latitude)
+                            Log.d("CodeAndroidLocation", " Network Longitude : " + locationNetwork!!.longitude)
+                        }
+                    }
+                    override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
+                    override fun onProviderEnabled(provider: String?) {}
+                    override fun onProviderDisabled(provider: String?) {}
+                })
+
+                val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
+                if (localNetworkLocation != null)
+                    locationNetwork = localNetworkLocation
+            }
+
+            if(locationGps!= null && locationNetwork!= null){
+                if(locationGps!!.accuracy > locationNetwork!!.accuracy){
+                    Log.d("CodeAndroidLocation", " Network Latitude : " + locationNetwork!!.latitude)
+                    Log.d("CodeAndroidLocation", " Network Longitude : " + locationNetwork!!.longitude)
+                } else {
+                    Log.d("CodeAndroidLocation", " GPS Latitude : " + locationGps!!.latitude)
+                    Log.d("CodeAndroidLocation", " GPS Longitude : " + locationGps!!.longitude)
+                }
+            }
+        } else {
+            startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
         }
     }
 
@@ -87,6 +173,15 @@ class MainActivity : AppCompatActivity() {
                 showToast(e.message.toString())
             }
         }
+    }
+
+    private fun checkPermission(permissionArray: Array<String>): Boolean {
+        var allSuccess = true
+        for (i in permissionArray.indices) {
+            if (checkCallingOrSelfPermission(permissionArray[i]) == PackageManager.PERMISSION_DENIED)
+                allSuccess = false
+        }
+        return allSuccess
     }
 
     /*
