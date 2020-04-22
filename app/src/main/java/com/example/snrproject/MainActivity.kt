@@ -27,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     private var hasNetwork = false
     private var locationGps: Location? = null
     private var locationNetwork: Location? = null
-    // In Kotlin `var` is used to declare a mutable variable. On the other hand
-    // `internal` means a variable is visible within a given module.
     //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
@@ -79,8 +77,6 @@ class MainActivity : AppCompatActivity() {
                     override fun onLocationChanged(location: Location?) {
                         if (location != null) {
                             locationGps = location
-                            Log.d("CodeAndroidLocation", " GPS Latitude : " + locationGps!!.latitude)
-                            Log.d("CodeAndroidLocation", " GPS Longitude : " + locationGps!!.longitude)
                             locationTxt.hint = " GPS Latitude : " + locationGps!!.latitude
                         }
                     }
@@ -99,8 +95,6 @@ class MainActivity : AppCompatActivity() {
                     override fun onLocationChanged(location: Location?) {
                         if (location != null) {
                             locationNetwork = location
-                            Log.d("CodeAndroidLocation", " Network Latitude : " + locationNetwork!!.latitude)
-                            Log.d("CodeAndroidLocation", " Network Longitude : " + locationNetwork!!.longitude)
                         }
                     }
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -111,16 +105,6 @@ class MainActivity : AppCompatActivity() {
                 val localNetworkLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER)
                 if (localNetworkLocation != null)
                     locationNetwork = localNetworkLocation
-            }
-
-            if(locationGps!= null && locationNetwork!= null){
-                if(locationGps!!.accuracy > locationNetwork!!.accuracy){
-                    Log.d("CodeAndroidLocation", " Network Latitude : " + locationNetwork!!.latitude)
-                    Log.d("CodeAndroidLocation", " Network Longitude : " + locationNetwork!!.longitude)
-                } else {
-                    Log.d("CodeAndroidLocation", " GPS Latitude : " + locationGps!!.latitude)
-                    Log.d("CodeAndroidLocation", " GPS Longitude : " + locationGps!!.longitude)
-                }
             }
         } else {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
