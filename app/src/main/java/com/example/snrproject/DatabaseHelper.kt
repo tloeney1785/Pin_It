@@ -18,7 +18,7 @@ class DatabaseHelper(context: Context?) :
      */
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT,user TEXT,pass TEXT)")
+                "AUTOINCREMENT,user TEXT,pass TEXT, email TEXT)")
     }
 
     /*
@@ -36,22 +36,23 @@ class DatabaseHelper(context: Context?) :
     /*
      * INSERT
      */
-    fun insertData(user: String, pass: String) {
+    fun insertData(user: String, pass: String, email: String) {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_PASS, pass)
-
+        contentValues.put(COLUMN_EMAIL, email)
         db.insert(TABLE_NAME, null, contentValues)
     }
     //Let's create  a method to update a row with new field values.
-    fun updateData(id: String, user: String, pass: String):
+    fun updateData(id: String, user: String, pass: String, email: String):
             Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_ID, id)
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_PASS, pass)
+        contentValues.put(COLUMN_EMAIL, email)
         db.update(TABLE_NAME, contentValues, "ID = ?", arrayOf(id))
         return true
     }
@@ -79,7 +80,8 @@ class DatabaseHelper(context: Context?) :
                         val userID = cursor.getString(cursor.getColumnIndex("id"))
                         val userName = cursor.getString(cursor.getColumnIndex("user"))
                         val userPass = cursor.getString(cursor.getColumnIndex("pass"))
-                        val user = Users(userID, userName, userPass)
+                        val userEmail = cursor.getString(cursor.getColumnIndex("email"))
+                        val user = Users(userID, userName, userPass, userEmail)
                         list.add(user)
                     } while (cursor.moveToNext())
                 }
@@ -97,5 +99,6 @@ class DatabaseHelper(context: Context?) :
         private const val COLUMN_ID = "id"
         private const val COLUMN_USER = "user"
         private const val COLUMN_PASS = "pass"
+        private const val COLUMN_EMAIL = "email"
     }
 }
