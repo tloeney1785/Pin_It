@@ -25,6 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:baselineAligned="false"
-            android:orientation="vertical"></LinearLayout>
+            android:orientation="vertical"
+            android:paddingTop="200dp"></LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
