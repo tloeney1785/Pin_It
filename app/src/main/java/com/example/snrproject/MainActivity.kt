@@ -3,15 +3,10 @@ package com.example.snrproject
 import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
 import kotlinx.android.synthetic.main.content_main.*
-import androidx.core.os.HandlerCompat.postDelayed
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.os.Handler
 
 
@@ -40,10 +35,10 @@ class MainActivity : AppCompatActivity() {
         handleInserts()
         //handleUpdates()
         //handleDeletes()
-       // handleViewing()
+        // handleViewing()
         handleHome()
         LogoutBtn.setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 
@@ -97,64 +92,64 @@ class MainActivity : AppCompatActivity() {
     /*
      * UPDATE button clicked
      */
-   /* private fun handleUpdates() {
-        updateBtn.setOnClickListener {
-            try {
-                val isUpdate = dbHelper.updateData(
-                    idTxt.text.toString(),
-                    userTxt.text.toString(),
-                    passTxt.text.toString(),
-                    locationTxt.text.toString(),
-                    urlTxt.text.toString())
-                if (isUpdate)
-                    showToast("Data Updated Successfully")
-                else
-                    showToast("Data Not Updated")
-            } catch (e: Exception){
-                e.printStackTrace()
-                showToast(e.message.toString())
-            }
-        }
-    }
+    /* private fun handleUpdates() {
+         updateBtn.setOnClickListener {
+             try {
+                 val isUpdate = dbHelper.updateData(
+                     idTxt.text.toString(),
+                     userTxt.text.toString(),
+                     passTxt.text.toString(),
+                     locationTxt.text.toString(),
+                     urlTxt.text.toString())
+                 if (isUpdate)
+                     showToast("Data Updated Successfully")
+                 else
+                     showToast("Data Not Updated")
+             } catch (e: Exception){
+                 e.printStackTrace()
+                 showToast(e.message.toString())
+             }
+         }
+     }
 
-    /*
-     * DELETE button clicked
-     */
-    private fun handleDeletes(){
-        deleteBtn.setOnClickListener {
-            try {
-                dbHelper.deleteData(idTxt.text.toString())
-                clearEditTexts()
-            } catch (e: Exception){
-                e.printStackTrace()
-                showToast(e.message.toString())
-            }
-        }
-    }
+     /*
+      * DELETE button clicked
+      */
+     private fun handleDeletes(){
+         deleteBtn.setOnClickListener {
+             try {
+                 dbHelper.deleteData(idTxt.text.toString())
+                 clearEditTexts()
+             } catch (e: Exception){
+                 e.printStackTrace()
+                 showToast(e.message.toString())
+             }
+         }
+     }
 
-    /*
-     * VIEW button clicked
-     */
-    private fun handleViewing() {
-        viewBtn.setOnClickListener(
-            View.OnClickListener {
-                val res = dbHelper.allData
-                if (res.isEmpty()) {
-                    showDialog("Error", "No Data Found")
-                    return@OnClickListener
-                }
+     /*
+      * VIEW button clicked
+      */
+     private fun handleViewing() {
+         viewBtn.setOnClickListener(
+             View.OnClickListener {
+                 val res = dbHelper.allData
+                 if (res.isEmpty()) {
+                     showDialog("Error", "No Data Found")
+                     return@OnClickListener
+                 }
 
-                val buffer = StringBuffer()
-                for (i in res.indices) {
-                    buffer.append("ID :" + res[i].userID + "\n")
-                    buffer.append("USER :" + res[i].userName + "\n")
-                    buffer.append("PASS :" + res[i].userPass + "\n")
-                    buffer.append("LOCATION :" + res[i].userLocation + "\n")
-                    buffer.append("URL :" + res[i].userURL + "\n\n")
-                }
-                showDialog("Data Listing", buffer.toString())
-            }
-        )
-    }*/
+                 val buffer = StringBuffer()
+                 for (i in res.indices) {
+                     buffer.append("ID :" + res[i].userID + "\n")
+                     buffer.append("USER :" + res[i].userName + "\n")
+                     buffer.append("PASS :" + res[i].userPass + "\n")
+                     buffer.append("LOCATION :" + res[i].userLocation + "\n")
+                     buffer.append("URL :" + res[i].userURL + "\n\n")
+                 }
+                 showDialog("Data Listing", buffer.toString())
+             }
+         )
+     }*/
 }
 
