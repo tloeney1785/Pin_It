@@ -8,14 +8,14 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-<!--    WRAPPER-->
+    <!--    WRAPPER-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
-<!--        INPUT FIELDS-->
+        <!--        INPUT FIELDS-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -54,7 +54,7 @@
                 android:hint="Location" />
         </LinearLayout>
 
-<!--        IMAGE PREVIEW-->
+        <!--        IMAGE PREVIEW-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -68,7 +68,7 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
-<!--        BUTTONS-->
+        <!--        BUTTONS-->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -125,3 +125,4 @@
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+
