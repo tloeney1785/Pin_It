@@ -80,7 +80,7 @@ class ImageDatabase(context: Context?) :
                         val userName = cursor.getString(cursor.getColumnIndex("user"))
                         val userLocation = cursor.getString(cursor.getColumnIndex("location"))
                         val userURL = cursor.getString(cursor.getColumnIndex("url"))
-                        val user = Images(userID, userLocation, userURL)
+                        val user = Images(userID, userName, userLocation, userURL)
                         list.add(user)
                     } while (cursor.moveToNext())
                 }

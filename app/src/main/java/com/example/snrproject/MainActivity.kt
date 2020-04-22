@@ -85,7 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleInserts() {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData(userTxt.text.toString(),locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
