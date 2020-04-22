@@ -14,13 +14,14 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_list_pics.btnHome
 import kotlinx.android.synthetic.main.activity_list_pics.btnProfile
 import kotlinx.android.synthetic.main.activity_list_pics.btnUpload
+import kotlinx.android.synthetic.main.activity_login_page.*
 import kotlinx.android.synthetic.main.activity_profile.*
 
 class ProfileActivity : AppCompatActivity(){
 
     private var dbHelper = DatabaseHelper(this)
     private var dbImages = ImageDatabase(this)
-    private val username = "Matt.ako"
+    private val username = login_username_edittext.toString()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,7 +85,6 @@ class ProfileActivity : AppCompatActivity(){
                 layout.addView(image)
                 layout.addView(user)
             }
-
         }
     }
 

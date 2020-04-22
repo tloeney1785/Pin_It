@@ -2,24 +2,26 @@ package com.example.snrproject
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_register.*
 import android.util.Log
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
 
 
-class Login : AppCompatActivity() {
+class RegisterActivity : AppCompatActivity() {
 
     internal var dbUsers = DatabaseHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        setContentView(R.layout.activity_register)
 
 
         button_register.setOnClickListener{
             val email = email_register.text.toString()
             val password = password_register.text.toString()
+            val username = username_register.text.toString()
+            dbUsers.insertData(username,password,email)
 
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
@@ -31,17 +33,14 @@ class Login : AppCompatActivity() {
                         return@addOnCompleteListener
                 }
 
-           // dbUsers.insertData(username,password,email)
         }
 
-        account_exist_textview.setOnClickListener{
+        accountexistText.setOnClickListener{
 
             //launch the login activity
-            val intent = Intent(this, LoginPage::class.java)
+            val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
         }
-
-
     }
 
