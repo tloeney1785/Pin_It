@@ -8,6 +8,8 @@ import android.content.Intent
 
 class Login : AppCompatActivity() {
 
+    internal var dbUsers = DatabaseHelper(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -20,6 +22,7 @@ class Login : AppCompatActivity() {
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
 
+           // dbUsers.insertData(username,password,email)
         }
 
         account_exist_textview.setOnClickListener{
