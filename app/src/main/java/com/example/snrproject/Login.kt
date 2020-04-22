@@ -10,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth
 
 class Login : AppCompatActivity() {
 
+    internal var dbUsers = DatabaseHelper(this)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -22,11 +24,16 @@ class Login : AppCompatActivity() {
             Log.d("Login", "Email is: " + email)
             Log.d("Login", "Password: $password")
 
+<<<<<<< HEAD
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(){
                     if(!it.isSuccessful)
                         return@addOnCompleteListener
                 }
+=======
+           // dbUsers.insertData(username,password,email)
+        }
+>>>>>>> 43ece7bc3b7eb8fd96d6ef8a47cfa94f2e99fb38
 
 
         }
