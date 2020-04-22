@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
         })
 
         handleInserts()
-        handleUpdates()
-        handleDeletes()
-        handleViewing()
+        //handleUpdates()
+        //handleDeletes()
+       // handleViewing()
         handleHome()
     }
 
@@ -97,7 +97,7 @@ class MainActivity : AppCompatActivity() {
     /*
      * UPDATE button clicked
      */
-    private fun handleUpdates() {
+   /* private fun handleUpdates() {
         updateBtn.setOnClickListener {
             try {
                 val isUpdate = dbHelper.updateData(
@@ -155,6 +155,6 @@ class MainActivity : AppCompatActivity() {
                 showDialog("Data Listing", buffer.toString())
             }
         )
-    }
+    }*/
 }
 
