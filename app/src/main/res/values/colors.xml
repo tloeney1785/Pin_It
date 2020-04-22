@@ -6,4 +6,5 @@
 
     <color name="navy">#34435B</color>
     <color name="white">#CCFFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
