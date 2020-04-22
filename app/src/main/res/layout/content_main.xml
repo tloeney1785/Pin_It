@@ -78,14 +78,6 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/updateBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:text="UPDATE"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <Button
                 android:id="@+id/insertBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -105,23 +97,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/viewBtn"
                 app:layout_constraintBottom_toBottomOf="parent" />
 
-            <Button
-                android:id="@+id/deleteBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:text="DELETE"
-                app:layout_constraintBottom_toBottomOf="parent" />
-
-            <Button
-                android:id="@+id/viewBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/roundedbutton"
-                android:text="View"
-                app:layout_constraintStart_toEndOf="@+id/HomeBtn"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent" />
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
