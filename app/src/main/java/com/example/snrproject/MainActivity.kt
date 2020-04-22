@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity() {
     // In Kotlin `var` is used to declare a mutable variable. On the other hand
     // `internal` means a variable is visible within a given module.
     internal var dbHelper = DatabaseHelper(this)
+    internal var dbImages = ImageDatabase(this)
 
     /*
      * onCreate method.
@@ -84,8 +85,7 @@ class MainActivity : AppCompatActivity() {
     private fun handleInserts() {
         insertBtn.setOnClickListener {
             try {
-                dbHelper.insertData(userTxt.text.toString(), passTxt.text.toString(),
-                    locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData(locationTxt.text.toString(), urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
