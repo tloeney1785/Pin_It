@@ -54,8 +54,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        getLocation() // call this in handleInserts() to put location in database automatically
-        handleInserts(username)
+        val locStr = getLocation() // call this in handleInserts() to put location in database automatically
+        handleInserts(username, locStr)
         //handleUpdates()
         //handleDeletes()
         // handleViewing()
@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("MissingPermission")
-    private fun getLocation() {
+    private fun getLocation() : String {
         locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         hasGps = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
         hasNetwork = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
@@ -107,8 +107,10 @@ class MainActivity : AppCompatActivity() {
                 if (localNetworkLocation != null)
                     locationNetwork = localNetworkLocation
             }
+            return locationGps!!.latitude.toString() + ", " + locationGps!!.longitude
         } else {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
+            return ""
         }
     }
 
@@ -149,10 +151,10 @@ class MainActivity : AppCompatActivity() {
     /*
      * ENTER button clicked
      */
-    private fun handleInserts(username:String) {
+    private fun handleInserts(username:String, location:String) {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(username,locationTxt.text.toString(), urlTxt.text.toString())
+                dbImages.insertData(username,location, urlTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
