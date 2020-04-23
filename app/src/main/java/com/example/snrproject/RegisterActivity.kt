@@ -5,6 +5,7 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_register.*
 import android.util.Log
 import android.content.Intent
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login_page.*
@@ -20,29 +21,11 @@ class RegisterActivity : AppCompatActivity() {
 
 
         button_register.setOnClickListener{
-            val email = email_register.text.toString()
-            val password = password_register.text.toString()
-            val username = username_register.text.toString()
-            dbUsers.insertData(username,password,email)
-
-            Log.d("Login", "Email is: " + email)
-            Log.d("Login", "Password: $password")
-
-
-            FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
-                .addOnCompleteListener(){
-                    if(!it.isSuccessful)
-                        return@addOnCompleteListener
-                }
-
-            saveUserToFireDatabase()
-            val intent = Intent(this, LoginActivity::class.java)
-            startActivity(intent)
+            PerformReigster()
         }
 
 
         accountexistText.setOnClickListener{
-
             //launch the login activity
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
@@ -61,6 +44,33 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    private fun PerformReigster(){
+        val email = email_register.text.toString()
+        val password = password_register.text.toString()
+        val username = username_register.text.toString()
+
+        //Return if fields are left blank
+        if(username.isEmpty() || password.isEmpty() || email.isEmpty()){
+            Toast.makeText(this, "Please fill out all forms", Toast.LENGTH_SHORT).show()
+            return
+        }
+        //Else, insert data into database
+
+        dbUsers.insertData(username,password,email)
+        Log.d("Login", "Email is: " + email)
+        Log.d("Login", "Password: $password")
+
+
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
+            .addOnCompleteListener(){
+                if(!it.isSuccessful)
+                    return@addOnCompleteListener
+            }
+
+        saveUserToFireDatabase()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+    }
 }
 
 class User(val uid: String, val username: String)

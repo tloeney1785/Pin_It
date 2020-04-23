@@ -2,6 +2,7 @@ package com.example.snrproject
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.ViewGroup.LayoutParams.*
@@ -11,11 +12,14 @@ import android.view.Gravity
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.LinearLayout
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_list_pics.btnHome
 import kotlinx.android.synthetic.main.activity_list_pics.btnProfile
 import kotlinx.android.synthetic.main.activity_list_pics.btnUpload
 import kotlinx.android.synthetic.main.activity_login_page.*
 import kotlinx.android.synthetic.main.activity_profile.*
+import kotlinx.android.synthetic.main.activity_register.*
+import java.util.*
 
 class ProfileActivity : AppCompatActivity(){
 
@@ -25,34 +29,52 @@ class ProfileActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-
         val username = intent.getStringExtra("username")
+
+
         profilenameTxt.text = username
         setupButtons(username)
         listPhotos(username)
 
         profilePictureBtn.setOnClickListener(){
-            Log.d("profileactivity", "Profile picture select")
+            Log.d("ProfileActivity", "Profile picture select")
             val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
         }
     }
 
+    var selectedPhotoUri: Uri? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if(requestCode == 0 && resultCode == Activity.RESULT_OK && data != null){
-            //proceed and check waht the selected was
+            //proceed and check what the selected was
             Log.d("ProfileActivity", "Photo was selected")
 
-            val uri = data.data
-            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, uri)
+            selectedPhotoUri = data.data
+            val bitmap = MediaStore.Images.Media.getBitmap(contentResolver, selectedPhotoUri)
             selectphoto_imageview_register.setImageBitmap(bitmap)
             profilePictureBtn.alpha = 0f
-            //val bitmapDrawable = BitmapDrawable(bitmap)
-            //profilePictureBtn.setBackgroundDrawable(bitmapDrawable)
+
+            uploadImageToFirebaseStorage()
         }
+    }
+
+    private fun uploadImageToFirebaseStorage(){
+        if(selectedPhotoUri==null)return
+        val filename = UUID.randomUUID().toString()
+        val ref = FirebaseStorage.getInstance().getReference("/images/$filename")
+        ref.putFile(selectedPhotoUri!!)
+            .addOnSuccessListener {
+                Log.d("ProfileActivity", "Successfully uploaded image: ${it.metadata?.path}")
+
+                ref.downloadUrl.addOnSuccessListener {
+                    it.toString()
+                    Log.d("ProfileActivity", "File Location: $it")
+                    dbImages.insertData(user = profilenameTxt.toString(), url = it.toString(), location = "0")
+                }
+            }
     }
 
     private fun listPhotos(username:String){
@@ -86,7 +108,7 @@ class ProfileActivity : AppCompatActivity(){
         }
     }
 
-        private fun setupButtons(username:String){
+    private fun setupButtons(username:String){
             btnProfile.setOnClickListener {
                 val intent = Intent(this, ProfileActivity::class.java)
                 intent.putExtra("username",username)
@@ -105,6 +127,7 @@ class ProfileActivity : AppCompatActivity(){
             startActivity(intent)
         }
     }
+
     /*
      * DELETE button clicked
      */
