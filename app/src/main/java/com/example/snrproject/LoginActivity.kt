@@ -23,26 +23,23 @@ class LoginActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+        val dbUsers = dbUsers.allData
 
         loginBtn.setOnClickListener(){
-            val dbUsers = dbUsers.allData
             for (i in dbUsers.indices) {
 
                 //filter by profile
                 if((dbUsers[i].userName==login_username_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()) ||
                     (dbUsers[i].userEmail==login_email_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()))
-                {val intent = Intent(this, ListPics::class.java)
+                {
+                    val intent = Intent(this, ListPics::class.java)
                     intent.putExtra("username",login_username_edittext.text.toString())
                     startActivity(intent)
+                    break
                 }
-                else{
+                else if (i == dbUsers.size - 1)
                     Toast.makeText(this@LoginActivity, "INCORRECT LOGIN CREDENTIALS", Toast.LENGTH_LONG).show()
-                    login_password_edittext.setText("")
-                    login_username_edittext.setText("")
-                    login_email_edittext.setText("")
-                }
             }
-
         }
     }
 
