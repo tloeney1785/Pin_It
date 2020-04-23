@@ -55,18 +55,22 @@ class ListPics : AppCompatActivity() {
         for (i in res.indices) {
             val image = ImageView(this)
             val user = TextView(this)
+            val loc = TextView(this)
 
             // use layoutParams to set image styling
             val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             layoutParams.gravity = Gravity.CENTER
             image.setLayoutParams(layoutParams)
             user.setLayoutParams(layoutParams)
+            loc.setLayoutParams(layoutParams)
 
 
             image.load(res[i].userURL)
             user.text = res[i].userName
+            loc.text = res[i].userLocation
             layout.addView(image)
             layout.addView(user)
+            layout.addView(loc)
         }
     }
 }
