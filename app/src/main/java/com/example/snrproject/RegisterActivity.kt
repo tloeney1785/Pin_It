@@ -7,6 +7,7 @@ import android.util.Log
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.android.synthetic.main.activity_login_page.*
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -35,6 +36,8 @@ class RegisterActivity : AppCompatActivity() {
                 }
 
             saveUserToFireDatabase()
+            val intent = Intent(this, LoginActivity::class.java)
+            startActivity(intent)
         }
 
 
