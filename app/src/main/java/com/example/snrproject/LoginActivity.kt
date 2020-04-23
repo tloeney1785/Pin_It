@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import coil.api.load
 import kotlinx.android.synthetic.main.activity_login_page.*
+import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
 
@@ -25,12 +26,19 @@ class LoginActivity : AppCompatActivity() {
         }
         val dbUsers = dbUsers.allData
 
+        fun hash(pass:String): String {
+            val bytes = pass.toByteArray()
+            val md = MessageDigest.getInstance("SHA-256")
+            val digest = md.digest(bytes)
+            return digest.fold("", { str, it -> str + "%02x".format(it) })
+        }
+
         loginBtn.setOnClickListener(){
             for (i in dbUsers.indices) {
 
                 //filter by profile
-                if((dbUsers[i].userName==login_username_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()) ||
-                    (dbUsers[i].userEmail==login_email_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()))
+                if((dbUsers[i].userName==login_username_edittext.text.toString() && dbUsers[i].userPass==hash(login_password_edittext.text.toString())) ||
+                    (dbUsers[i].userEmail==login_email_edittext.text.toString() && dbUsers[i].userPass==hash(login_password_edittext.text.toString())))
                 {
                     val intent = Intent(this, ListPics::class.java)
                     intent.putExtra("username",login_username_edittext.text.toString())

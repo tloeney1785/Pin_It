@@ -17,12 +17,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/captionTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Caption"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/urlTxt" />
+
     <TextView
         android:id="@+id/locationTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Location"
-        app:layout_constraintTop_toBottomOf="@id/urlTxt"/>
+        app:layout_constraintTop_toBottomOf="@id/captionTxt"/>
 
     <!--        IMAGE PREVIEW-->
     <androidx.appcompat.widget.AppCompatImageView

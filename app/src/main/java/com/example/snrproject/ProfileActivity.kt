@@ -34,7 +34,6 @@ class ProfileActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-
         loadProfilePicture(getUsername())
 
         profilenameTxt.text = getUsername()
@@ -94,7 +93,7 @@ class ProfileActivity : AppCompatActivity(){
                     it.toString()
                     Log.d("ProfileActivity", "File Location: $it")
                     dbUsers.updateURL(user = getUsername(), url = it.toString())
-                    //dbImages.insertData(user = profilenameTxt.toString(), url = it.toString(), location = "0")
+
                 }
             }
     }
@@ -108,45 +107,55 @@ class ProfileActivity : AppCompatActivity(){
         /*
         * Load all images in list view
         */
-
         val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val dbImages = dbImages.allData
 
         for (i in dbImages.indices) {
-            val image = ImageView(this)
             val user = TextView(this)
+            val loc = TextView(this)
+            val image = ImageView(this)
+            val caption = TextView(this)
 
-            // use layoutParams to set image styling
+            // use layouts to set styling
+            val usrLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val locLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val imgLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val captionLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            usrLayout.gravity = Gravity.LEFT
+            locLayout.gravity = Gravity.LEFT
+            imgLayout.gravity = Gravity.CENTER
+            captionLayout.gravity = Gravity.LEFT
 
-            layoutParams.gravity = Gravity.CENTER_HORIZONTAL
+            user.setLayoutParams(usrLayout)
+            loc.setLayoutParams(locLayout)
+            image.setLayoutParams(imgLayout)
+            caption.setLayoutParams(captionLayout)
 
-            image.setLayoutParams(layoutParams)
-            user.setLayoutParams(layoutParams)
+            user.text = dbImages[i].userName
+            loc.text = dbImages[i].userLocation
+            image.load(dbImages[i].userURL)
+            caption.text = dbImages[i].userCaption
 
-            //filter by profile
-            if(dbImages[i].userName==username){
-                //load image and username
-                image.load(dbImages[i].userURL)
-                user.text = username
-                layout.addView(image)
-                layout.addView(user)
-            }
+            layout.addView(user)
+            layout.addView(loc)
+            layout.addView(image)
+            layout.addView(caption)
         }
     }
 
     private fun setupButtons(username:String){
-            btnProfile.setOnClickListener {
-                val intent = Intent(this, ProfileActivity::class.java)
-                intent.putExtra("username",username)
-                startActivity(intent)
-            }
+        btnProfile.setOnClickListener {
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
+        }
 
-            btnHome.setOnClickListener {
-                val intent = Intent(this, ListPics::class.java)
-                intent.putExtra("username",username)
-                startActivity(intent)
-            }
+        btnHome.setOnClickListener {
+            val intent = Intent(this, ListPics::class.java)
+            intent.putExtra("username",username)
+            startActivity(intent)
+        }
 
         btnUpload.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)

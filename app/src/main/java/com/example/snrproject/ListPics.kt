@@ -56,26 +56,32 @@ class ListPics : AppCompatActivity() {
             val user = TextView(this)
             val loc = TextView(this)
             val image = ImageView(this)
+            val caption = TextView(this)
 
             // use layouts to set styling
             val usrLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             val locLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             val imgLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val captionLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             usrLayout.gravity = Gravity.LEFT
             locLayout.gravity = Gravity.LEFT
             imgLayout.gravity = Gravity.CENTER
+            captionLayout.gravity = Gravity.LEFT
 
             user.setLayoutParams(usrLayout)
             loc.setLayoutParams(locLayout)
             image.setLayoutParams(imgLayout)
+            caption.setLayoutParams(captionLayout)
 
             user.text = res[i].userName
             loc.text = res[i].userLocation
             image.load(res[i].userURL)
+            caption.text = res[i].userCaption
 
             layout.addView(user)
             layout.addView(loc)
             layout.addView(image)
+            layout.addView(caption)
         }
     }
 }
