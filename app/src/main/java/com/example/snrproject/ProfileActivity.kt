@@ -72,7 +72,7 @@ class ProfileActivity : AppCompatActivity(){
                 ref.downloadUrl.addOnSuccessListener {
                     it.toString()
                     Log.d("ProfileActivity", "File Location: $it")
-                    dbImages.insertData(user = profilenameTxt.toString(), url = it.toString(), location = "0")
+//                    dbImages.insertData(user = profilenameTxt.toString(), url = it.toString(), location = "0")
                 }
             }
     }

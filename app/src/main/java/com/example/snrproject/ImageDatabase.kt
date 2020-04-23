@@ -17,7 +17,7 @@ class ImageDatabase(context: Context?) :
      * CREATE
      */
     override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " + "AUTOINCREMENT,user TEXT, location TEXT, url TEXT)")
+        db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " + "AUTOINCREMENT,user TEXT, location TEXT, url TEXT, caption TEXT)")
     }
 
     /*
@@ -35,16 +35,17 @@ class ImageDatabase(context: Context?) :
     /*
      * INSERT
      */
-    fun insertData(user: String, location: String, url: String) {
+    fun insertData(user: String, location: String, url: String, caption: String) {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_LOCATION, location)
         contentValues.put(COLUMN_URL, url)
+        contentValues.put(COLUMN_CAPTION, caption)
         db.insert(TABLE_NAME, null, contentValues)
     }
     //Let's create  a method to update a row with new field values.
-    fun updateData(user: String, id: String, location: String, url: String):
+    fun updateData(user: String, id: String, location: String, url: String, caption: String):
             Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -52,6 +53,7 @@ class ImageDatabase(context: Context?) :
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_LOCATION, location)
         contentValues.put(COLUMN_URL, url)
+        contentValues.put(COLUMN_CAPTION, caption)
         db.update(TABLE_NAME, contentValues, "ID = ?", arrayOf(id))
         return true
     }
@@ -80,7 +82,8 @@ class ImageDatabase(context: Context?) :
                         val userName = cursor.getString(cursor.getColumnIndex("user"))
                         val userLocation = cursor.getString(cursor.getColumnIndex("location"))
                         val userURL = cursor.getString(cursor.getColumnIndex("url"))
-                        val user = Images(userID, userName, userLocation, userURL)
+                        val userCaption = cursor.getString(cursor.getColumnIndex("caption"))
+                        val user = Images(userID, userName, userLocation, userURL, userCaption)
                         list.add(user)
                     } while (cursor.moveToNext())
                 }
@@ -99,5 +102,6 @@ class ImageDatabase(context: Context?) :
         private const val COLUMN_USER = "user"
         private const val COLUMN_LOCATION = "location"
         private const val COLUMN_URL = "url"
+        private const val COLUMN_CAPTION = "caption"
     }
 }
