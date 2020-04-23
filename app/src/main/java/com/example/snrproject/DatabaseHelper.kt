@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class DatabaseHelper(context: Context?) :
     SQLiteOpenHelper(
@@ -45,6 +46,20 @@ class DatabaseHelper(context: Context?) :
         contentValues.put(COLUMN_URL, url)
         db.insert(TABLE_NAME, null, contentValues)
     }
+    /*
+     * INSERT PICTURE URL
+     */
+    //Let's create  a method to update a row with new field values.
+    fun updateURL(user: String, url: String):
+            Boolean {
+        val db = this.writableDatabase
+        val contentValues = ContentValues()
+        contentValues.put(COLUMN_URL, url)
+        Log.d("DatabaseHelper", "Inserting $url")
+        db.update(TABLE_NAME, contentValues, "USER = ?", arrayOf(user))
+        return true
+    }
+
     //Let's create  a method to update a row with new field values.
     fun updateData(id: String, user: String, pass: String, email: String, url:String):
             Boolean {

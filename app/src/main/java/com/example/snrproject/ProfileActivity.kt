@@ -2,39 +2,43 @@ package com.example.snrproject
 
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import android.view.ViewGroup.LayoutParams.*
-import android.widget.*
-import coil.api.load
-import android.view.Gravity
 import android.provider.MediaStore
 import android.util.Log
+import android.view.Gravity
+import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import coil.api.load
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_list_pics.btnHome
 import kotlinx.android.synthetic.main.activity_list_pics.btnProfile
 import kotlinx.android.synthetic.main.activity_list_pics.btnUpload
-import kotlinx.android.synthetic.main.activity_login_page.*
 import kotlinx.android.synthetic.main.activity_profile.*
-import kotlinx.android.synthetic.main.activity_register.*
 import java.util.*
+
 
 class ProfileActivity : AppCompatActivity(){
 
-    private var dbHelper = DatabaseHelper(this)
+    private var dbUsers = DatabaseHelper(this)
     private var dbImages = ImageDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
-        val username = intent.getStringExtra("username")
 
+        loadProfilePicture(getUsername())
 
-        profilenameTxt.text = username
-        setupButtons(username)
-        listPhotos(username)
+        profilenameTxt.text = getUsername()
+        setupButtons(getUsername())
+        listPhotos(getUsername())
 
         profilePictureBtn.setOnClickListener(){
             Log.d("ProfileActivity", "Profile picture select")
@@ -61,6 +65,22 @@ class ProfileActivity : AppCompatActivity(){
         }
     }
 
+    private fun loadProfilePicture(username: String){
+        val User = dbUsers.allData
+        for(i in User.indices){
+            if(User[i].userName==username){
+                Log.d("ProfileActivity", "Username was found, loading profile picture")
+                val image = ImageView(this)
+                image.load(User[i].userURL)
+                Log.d("ProfileActivity", User[i].userURL.toString())
+                val drawable = image.drawable
+                selectphoto_imageview_register.setImageDrawable(drawable)
+                profilePictureBtn.alpha = 0f
+                break
+            }
+        }
+    }
+
     private fun uploadImageToFirebaseStorage(){
         if(selectedPhotoUri==null)return
         val filename = UUID.randomUUID().toString()
@@ -72,9 +92,15 @@ class ProfileActivity : AppCompatActivity(){
                 ref.downloadUrl.addOnSuccessListener {
                     it.toString()
                     Log.d("ProfileActivity", "File Location: $it")
-//                    dbImages.insertData(user = profilenameTxt.toString(), url = it.toString(), location = "0")
+                    dbUsers.updateURL(user = getUsername(), url = it.toString())
+
                 }
             }
+    }
+
+    private fun getUsername():String{
+        val username = intent.getStringExtra("username")
+        return username
     }
 
     private fun listPhotos(username:String){
@@ -141,18 +167,4 @@ class ProfileActivity : AppCompatActivity(){
         }
     }
 
-    /*
-     * DELETE button clicked
-     */
-    /*private fun handleDeletes(){
-        deleteBtn.setOnClickListener {
-            try {
-                dbHelper.deleteData(idTxt.text.toString())
-                clearEditTexts()
-            } catch (e: Exception){
-                e.printStackTrace()
-                showToast(e.message.toString())
-            }
-        }
-    }*/
 }
