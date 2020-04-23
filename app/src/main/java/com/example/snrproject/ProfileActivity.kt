@@ -53,7 +53,6 @@ class ProfileActivity : AppCompatActivity(){
             //val bitmapDrawable = BitmapDrawable(bitmap)
             //profilePictureBtn.setBackgroundDrawable(bitmapDrawable)
         }
-
     }
 
     private fun listPhotos(username:String){
