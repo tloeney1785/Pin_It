@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     //internal var dbHelper = DatabaseHelper(this)
     internal var dbImages = ImageDatabase(this)
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+
     /*
      * onCreate method.
      */
@@ -54,12 +55,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val locStr = getLocation() // call this in handleInserts() to put location in database automatically
+        val locStr = getLocation()
         handleInserts(username, locStr)
-        //handleUpdates()
-        //handleDeletes()
-        // handleViewing()
         handleHome(username)
+        // handleUpdates()
+        // handleDeletes()
+        // handleViewing()
         LogoutBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
@@ -78,7 +79,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onLocationChanged(location: Location?) {
                         if (location != null) {
                             locationGps = location
-                            locationTxt.hint = " GPS Latitude : " + locationGps!!.latitude
+                            locationTxt.hint = "Current Location:\nLatitude : " + locationGps!!.latitude + "\nLongitude : " +  locationGps!!.longitude
                         }
                     }
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
