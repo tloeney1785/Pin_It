@@ -111,10 +111,13 @@ class ProfileActivity : AppCompatActivity(){
             image.load(dbImages[i].userURL)
             caption.text = dbImages[i].userCaption
 
-            layout.addView(user)
-            layout.addView(loc)
-            layout.addView(image)
-            layout.addView(caption)
+            // filter by profile
+            if(dbImages[i].userName == username) {
+                layout.addView(user)
+                layout.addView(loc)
+                layout.addView(image)
+                layout.addView(caption)
+            }
         }
     }
 
