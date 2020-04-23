@@ -6,6 +6,7 @@ import kotlinx.android.synthetic.main.activity_register.*
 import android.util.Log
 import android.content.Intent
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -33,7 +34,9 @@ class RegisterActivity : AppCompatActivity() {
                         return@addOnCompleteListener
                 }
 
+            saveUserToFireDatabase()
         }
+
 
         accountexistText.setOnClickListener{
 
@@ -41,6 +44,20 @@ class RegisterActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             startActivity(intent)
         }
+
         }
+    private fun saveUserToFireDatabase(){
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(uid, username_register.toString())
+
+        ref.setValue(user)
+            .addOnSuccessListener{
+                Log.d("RegisterActivity", "Finally we saved the user to Firebase")
+            }
     }
 
+}
+
+class User(val uid: String, val username: String)
