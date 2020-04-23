@@ -18,7 +18,7 @@ class DatabaseHelper(context: Context?) :
      */
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL("CREATE TABLE $TABLE_NAME (id INTEGER PRIMARY KEY " +
-                "AUTOINCREMENT,user TEXT,pass TEXT, email TEXT)")
+                "AUTOINCREMENT,user TEXT,pass TEXT, email TEXT, url TEXT)")
     }
 
     /*
@@ -36,16 +36,17 @@ class DatabaseHelper(context: Context?) :
     /*
      * INSERT
      */
-    fun insertData(user: String, pass: String, email: String) {
+    fun insertData(user: String, pass: String, email: String, url:String) {
         val db = this.writableDatabase
         val contentValues = ContentValues()
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_PASS, pass)
         contentValues.put(COLUMN_EMAIL, email)
+        contentValues.put(COLUMN_URL, url)
         db.insert(TABLE_NAME, null, contentValues)
     }
     //Let's create  a method to update a row with new field values.
-    fun updateData(id: String, user: String, pass: String, email: String):
+    fun updateData(id: String, user: String, pass: String, email: String, url:String):
             Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
@@ -53,6 +54,7 @@ class DatabaseHelper(context: Context?) :
         contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_PASS, pass)
         contentValues.put(COLUMN_EMAIL, email)
+        contentValues.put(COLUMN_URL, url)
         db.update(TABLE_NAME, contentValues, "ID = ?", arrayOf(id))
         return true
     }
@@ -81,7 +83,8 @@ class DatabaseHelper(context: Context?) :
                         val userName = cursor.getString(cursor.getColumnIndex("user"))
                         val userPass = cursor.getString(cursor.getColumnIndex("pass"))
                         val userEmail = cursor.getString(cursor.getColumnIndex("email"))
-                        val user = Users(userID, userName, userPass, userEmail)
+                        val userUrl= cursor.getString(cursor.getColumnIndex("url"))
+                        val user = Users(userID, userName, userPass, userEmail,userUrl)
                         list.add(user)
                     } while (cursor.moveToNext())
                 }
@@ -100,5 +103,6 @@ class DatabaseHelper(context: Context?) :
         private const val COLUMN_USER = "user"
         private const val COLUMN_PASS = "pass"
         private const val COLUMN_EMAIL = "email"
+        private const val COLUMN_URL = "url"
     }
 }

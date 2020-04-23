@@ -56,7 +56,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         //Else, insert data into database
 
-        dbUsers.insertData(username,password,email)
+        dbUsers.insertData(username,password,email,"matt is gay")
         Log.d("Login", "Email is: " + email)
         Log.d("Login", "Password: $password")
 
