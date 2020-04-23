@@ -29,7 +29,7 @@ class ProfileActivity : AppCompatActivity(){
         val username = intent.getStringExtra("username")
         profilenameTxt.text = username
         setupButtons(username)
-        //listPhotos(username)
+        listPhotos(username)
 
         profilePictureBtn.setOnClickListener(){
             Log.d("profileactivity", "Profile picture select")
@@ -63,10 +63,9 @@ class ProfileActivity : AppCompatActivity(){
 
         val layoutParams = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
         val layout: LinearLayout = findViewById(R.id.rootContainer)
-        val res = dbHelper.allData
-        val res1 = dbImages.allData
+        val dbImages = dbImages.allData
 
-        for (i in res1.indices) {
+        for (i in dbImages.indices) {
             val image = ImageView(this)
             val user = TextView(this)
 
@@ -78,10 +77,10 @@ class ProfileActivity : AppCompatActivity(){
             user.setLayoutParams(layoutParams)
 
             //filter by profile
-            if(res[i].userName==username){
+            if(dbImages[i].userName==username){
                 //load image and username
-                image.load(res1[i].userURL)
-                user.text = res[i].userName
+                image.load(dbImages[i].userURL)
+                user.text = username
                 layout.addView(image)
                 layout.addView(user)
             }
