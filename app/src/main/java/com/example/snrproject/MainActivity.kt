@@ -136,6 +136,7 @@ class MainActivity : AppCompatActivity() {
     private fun clearEditTexts(){
         locationTxt.setText("")
         urlTxt.setText("")
+        captionTxt.setText("")
     }
 
     /*
