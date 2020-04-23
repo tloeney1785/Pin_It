@@ -9,6 +9,7 @@ import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_login_page.*
+import java.security.MessageDigest
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -32,6 +33,15 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         }
+
+        fun hash(pass:String): String {
+            val bytes = pass.toByteArray()
+            val md = MessageDigest.getInstance("SHA-256")
+            val digest = md.digest(bytes)
+            return digest.fold("", { str, it -> str + "%02x".format(it) })
+        }
+
+
     private fun saveUserToFireDatabase(){
         val uid = FirebaseAuth.getInstance().uid ?: ""
         val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
@@ -46,7 +56,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun PerformReigster(){
         val email = email_register.text.toString()
-        val password = password_register.text.toString()
+        val password = hash(password_register.text.toString())
         val username = username_register.text.toString()
 
         //Return if fields are left blank
@@ -56,7 +66,7 @@ class RegisterActivity : AppCompatActivity() {
         }
         //Else, insert data into database
 
-        dbUsers.insertData(username,password,email,"matt is gay")
+        dbUsers.insertData(username,password,email,"")
         Log.d("Login", "Email is: " + email)
         Log.d("Login", "Password: $password")
 
