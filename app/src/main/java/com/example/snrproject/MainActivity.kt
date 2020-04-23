@@ -193,20 +193,7 @@ class MainActivity : AppCompatActivity() {
          }
      }
 
-     /*
-      * DELETE button clicked
-      */
-     private fun handleDeletes(){
-         deleteBtn.setOnClickListener {
-             try {
-                 dbHelper.deleteData(idTxt.text.toString())
-                 clearEditTexts()
-             } catch (e: Exception){
-                 e.printStackTrace()
-                 showToast(e.message.toString())
-             }
-         }
-     }
+
 
      /*
       * VIEW button clicked

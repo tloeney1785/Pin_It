@@ -107,4 +107,18 @@ class ProfileActivity : AppCompatActivity(){
             startActivity(intent)
         }
     }
+    /*
+     * DELETE button clicked
+     */
+    /*private fun handleDeletes(){
+        deleteBtn.setOnClickListener {
+            try {
+                dbHelper.deleteData(idTxt.text.toString())
+                clearEditTexts()
+            } catch (e: Exception){
+                e.printStackTrace()
+                showToast(e.message.toString())
+            }
+        }
+    }*/
 }
