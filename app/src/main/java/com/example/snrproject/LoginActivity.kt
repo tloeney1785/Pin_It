@@ -29,8 +29,9 @@ class LoginActivity : AppCompatActivity() {
             for (i in dbUsers.indices) {
 
                 //filter by profile
-                if(dbUsers[i].userName==login_username_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()) {
-                    val intent = Intent(this, ListPics::class.java)
+                if((dbUsers[i].userName==login_username_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()) ||
+                    (dbUsers[i].userEmail==login_email_edittext.text.toString() && dbUsers[i].userPass==login_password_edittext.text.toString()))
+                {val intent = Intent(this, ListPics::class.java)
                     intent.putExtra("username",login_username_edittext.text.toString())
                     startActivity(intent)
                 }
@@ -38,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "INCORRECT LOGIN CREDENTIALS", Toast.LENGTH_LONG).show()
                     login_password_edittext.setText("")
                     login_username_edittext.setText("")
+                    login_email_edittext.setText("")
                 }
             }
 
