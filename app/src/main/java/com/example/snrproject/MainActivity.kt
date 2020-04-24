@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val username = intent.getStringExtra("username")
 
-        getLocationAddress()
+
         // constantly update image preview by checking urlTxt
         val handler = Handler()
         handler.post(object : Runnable {
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val locStr = getLocation()
-        handleInserts(username, locStr)
+        handleInserts(username)
         handleHome(username)
         // handleUpdates()
         // handleDeletes()
@@ -67,7 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getLocationAddress(){
+    private fun getLocationAddress(): String{
         val coordinates = getLocation().split(", ")
         val latitude = coordinates[0].toDouble()
         val longitude = coordinates[1].toDouble()
@@ -82,13 +82,16 @@ class MainActivity : AppCompatActivity() {
             }
             else {
                 if (addresses.isNotEmpty()) {
+                    val locationAddress =  addresses.get(0).locality +", " + addresses.get(0).adminArea + ", " + addresses.get(0).countryCode
                     Log.d("MainActivity",addresses.get(0).featureName + "," + addresses.get(0).locality +"," + addresses.get(0).adminArea + "," + addresses.get(0).countryName);
+                    return locationAddress
                 }
             }
         }
         catch (e: java.lang.Exception){
             Log.d("MainAcitivity", "Caught ya")
         }
+        return ""
 
     }
 
@@ -180,10 +183,10 @@ class MainActivity : AppCompatActivity() {
     /*
      * ENTER button clicked
      */
-    private fun handleInserts(username:String, location:String) {
+    private fun handleInserts(username:String) {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(username,location, urlTxt.text.toString(), captionTxt.text.toString())
+                dbImages.insertData(username,getLocationAddress(), urlTxt.text.toString(), captionTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
