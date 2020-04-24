@@ -65,13 +65,16 @@ class ProfileActivity : AppCompatActivity(){
         val User = dbUsers.allData
         for(i in User.indices){
             if(User[i].userName==username){
-                Log.d("ProfileActivity", "Username was found, loading profile picture")
-                selectphoto_imageview_register.load(User[i].userURL)
-                profilePictureBtn.alpha = 0f
+                if(!User[i].userURL.isEmpty()){
+                    Log.d("ProfileActivity", "Username was found, loading profile picture")
+                    selectphoto_imageview_register.load(User[i].userURL)
+                    profilePictureBtn.alpha = 0f
 
-                //val layout: LinearLayout = findViewById(R.id.rootContainer)
-                //layout.addView(image)
-                break
+                    //val layout: LinearLayout = findViewById(R.id.rootContainer)
+                    //layout.addView(image)
+                    break
+                }
+
             }
         }
     }
@@ -121,6 +124,8 @@ class ProfileActivity : AppCompatActivity(){
             locLayout.gravity = Gravity.LEFT
             imgLayout.gravity = Gravity.CENTER
             captionLayout.gravity = Gravity.LEFT
+            imgLayout.width = 1100
+            imgLayout.height = 1100
 
             user.setLayoutParams(usrLayout)
             loc.setLayoutParams(locLayout)

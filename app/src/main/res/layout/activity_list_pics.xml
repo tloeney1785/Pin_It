@@ -46,7 +46,7 @@
         app:layout_constraintStart_toEndOf="@+id/btnProfile" />
 
     <View
-        android:id="@+id/view"
+        android:id="@+id/navbarView"
         android:layout_width="456dp"
         android:layout_height="61dp"
         android:background="@drawable/roundedbutton"

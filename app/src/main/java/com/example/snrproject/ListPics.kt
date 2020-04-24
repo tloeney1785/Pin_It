@@ -17,6 +17,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import kotlinx.android.synthetic.main.content_profile.*
 
 class ListPics : AppCompatActivity() {
     private var dbImages = ImageDatabase(this)
@@ -70,40 +71,43 @@ class ListPics : AppCompatActivity() {
          */
         val layout: LinearLayout = findViewById(R.id.rootContainer)
         val res = dbImages.allData
-        for (i in res.indices) {
+        for (i in res.size-1 downTo 0) {
             val user = TextView(this)
             val loc = TextView(this)
             val image = ImageView(this)
             val caption = TextView(this)
 
             // use layouts to set styling
-            val usrLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
-            val locLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
+            val usrLayout = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
+            val locLayout = LinearLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT)
             val imgLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             val captionLayout = LinearLayout.LayoutParams(WRAP_CONTENT, WRAP_CONTENT)
             usrLayout.gravity = Gravity.LEFT
             locLayout.gravity = Gravity.LEFT
             imgLayout.gravity = Gravity.CENTER
+            imgLayout.width = 1100
+            imgLayout.height = 1100
             captionLayout.gravity = Gravity.LEFT
 
+            image.setLayoutParams(imgLayout)
             user.setLayoutParams(usrLayout)
             loc.setLayoutParams(locLayout)
-            image.setLayoutParams(imgLayout)
             caption.setLayoutParams(captionLayout)
+
 
             user.text = res[i].userName
             loc.text = res[i].userLocation
             image.load(res[i].userURL)
             caption.text = res[i].userCaption
 
-            layout.addView(user)
-            layout.addView(loc)
             layout.addView(image)
+            layout.addView(loc)
+            layout.addView(user)
             layout.addView(caption)
 
             // get pins
             var coordinates = res[i].userLocation.split(", ")
-            var location = LatLng(coordinates[0].toDouble(), coordinates[1].toDouble()) // create coordinate
+            //var location = LatLng(coordinates[0].toDouble(), coordinates[1].toDouble()) // create coordinate
 //            googleMap.addMarker(MarkerOptions().position(location)) // add pin to location
 //            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(location, 15f)) // zoom map to general area
         }
