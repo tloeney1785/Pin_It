@@ -2,10 +2,6 @@ package com.example.snrproject
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -17,7 +13,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import coil.api.load
-import coil.transform.CircleCropTransformation
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_list_pics.btnHome
 import kotlinx.android.synthetic.main.activity_list_pics.btnProfile
@@ -28,7 +23,7 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity(){
 
-    private var dbUsers = DatabaseHelper(this)
+    private var dbUsers = UserDatabase(this)
     private var dbImages = ImageDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
