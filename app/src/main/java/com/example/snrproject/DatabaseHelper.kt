@@ -50,12 +50,13 @@ class DatabaseHelper(context: Context?) :
      * INSERT PICTURE URL
      */
     //Let's create  a method to update a row with new field values.
-    fun updateURL(user: String, url: String):
+    fun updateURL(user: String, url: String)://url: String):
             Boolean {
         val db = this.writableDatabase
         val contentValues = ContentValues()
+        contentValues.put(COLUMN_USER, user)
         contentValues.put(COLUMN_URL, url)
-        Log.d("DatabaseHelper", "Inserting $url")
+        Log.d("DatabaseHelper", "Inserting $user")
         db.update(TABLE_NAME, contentValues, "USER = ?", arrayOf(user))
         return true
     }

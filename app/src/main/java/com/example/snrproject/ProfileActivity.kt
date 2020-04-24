@@ -92,11 +92,12 @@ class ProfileActivity : AppCompatActivity(){
                 ref.downloadUrl.addOnSuccessListener {
                     it.toString()
                     Log.d("ProfileActivity", "File Location: $it")
-                    dbUsers.updateURL(user = getUsername(), url = it.toString())
+                    dbUsers.updateURL(user = getUsername().toString(), url = it.toString())
 
                 }
             }
     }
+
 
     private fun getUsername():String{
         val username = intent.getStringExtra("username")
