@@ -17,8 +17,8 @@
         android:id="@+id/insertBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundedbutton"
-        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="0dp"
         android:text="Post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/HomeBtn"
@@ -28,8 +28,7 @@
         android:id="@+id/HomeBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundedbutton"
-        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
         android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/LogoutBtn"
@@ -39,11 +38,21 @@
         android:id="@+id/LogoutBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/roundedbutton"
-        android:layout_marginBottom="10dp"
+        android:background="@android:color/transparent"
+        android:layout_marginBottom="0dp"
         android:text="Log Out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/HomeBtn" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="456dp"
+        android:layout_height="0dp"
+        android:background="@drawable/roundedbutton"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/HomeBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
