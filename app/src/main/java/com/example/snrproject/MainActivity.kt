@@ -32,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     internal var dbImages = ImageDatabase(this)
     private var permissions = arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
 
+
     /*
      * onCreate method.
      */
@@ -108,7 +109,7 @@ class MainActivity : AppCompatActivity() {
                     override fun onLocationChanged(location: Location?) {
                         if (location != null) {
                             locationGps = location
-                            locationTxt.hint = "Current Location:\nLatitude : " + locationGps!!.latitude + "\nLongitude : " +  locationGps!!.longitude
+                            locationTxt.hint = "Current Location:\nLatitude : " + locationGps!!.latitude + "\nLongitude : " + locationGps!!.longitude
                         }
                     }
                     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
