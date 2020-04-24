@@ -8,13 +8,12 @@ import android.content.Intent
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_login_page.*
 import java.security.MessageDigest
 
 
 class RegisterActivity : AppCompatActivity() {
 
-    internal var dbUsers = DatabaseHelper(this)
+    internal var dbUsers = UserDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

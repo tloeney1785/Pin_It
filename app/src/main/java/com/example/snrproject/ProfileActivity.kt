@@ -2,10 +2,6 @@ package com.example.snrproject
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -27,7 +23,7 @@ import java.util.*
 
 class ProfileActivity : AppCompatActivity(){
 
-    private var dbUsers = DatabaseHelper(this)
+    private var dbUsers = UserDatabase(this)
     private var dbImages = ImageDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,12 +66,11 @@ class ProfileActivity : AppCompatActivity(){
         for(i in User.indices){
             if(User[i].userName==username){
                 Log.d("ProfileActivity", "Username was found, loading profile picture")
-                val image = ImageView(this)
-                image.load(User[i].userURL)
-                Log.d("ProfileActivity", User[i].userURL.toString())
-                val drawable = image.drawable
-                selectphoto_imageview_register.setImageDrawable(drawable)
+                selectphoto_imageview_register.load(User[i].userURL)
                 profilePictureBtn.alpha = 0f
+
+                //val layout: LinearLayout = findViewById(R.id.rootContainer)
+                //layout.addView(image)
                 break
             }
         }
@@ -93,7 +88,6 @@ class ProfileActivity : AppCompatActivity(){
                     it.toString()
                     Log.d("ProfileActivity", "File Location: $it")
                     dbUsers.updateURL(user = getUsername().toString(), url = it.toString())
-
                 }
             }
     }

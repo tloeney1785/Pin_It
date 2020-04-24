@@ -10,15 +10,15 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.activity_main.*
 import android.os.Handler
 import android.Manifest
-import android.location.LocationListener
-import android.location.LocationManager
-import android.location.Location
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.PackageManager
+import android.location.*
+import android.location.Address
 import android.os.Build
 import android.util.Log
 import android.provider.Settings
+import java.util.*
 
 private const val PERMISSION_REQUEST = 10
 
@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         val username = intent.getStringExtra("username")
 
+
         // constantly update image preview by checking urlTxt
         val handler = Handler()
         handler.post(object : Runnable {
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val locStr = getLocation()
-        handleInserts(username, locStr)
+        handleInserts(username)
         handleHome(username)
         // handleUpdates()
         // handleDeletes()
@@ -65,6 +66,34 @@ class MainActivity : AppCompatActivity() {
         LogoutBtn.setOnClickListener {
             startActivity(Intent(this, LoginActivity::class.java))
         }
+    }
+
+    private fun getLocationAddress(): String{
+        val coordinates = getLocation().split(", ")
+        val latitude = coordinates[0].toDouble()
+        val longitude = coordinates[1].toDouble()
+        try{
+            var geo = Geocoder(this)
+
+            val addresses : List<Address>
+            addresses = geo.getFromLocation(latitude, longitude, 1)
+
+            if (addresses.isEmpty()) {
+                Log.d("MainAcitivity", "Waiting for location")
+            }
+            else {
+                if (addresses.isNotEmpty()) {
+                    val locationAddress =  addresses.get(0).locality +", " + addresses.get(0).adminArea + ", " + addresses.get(0).countryCode
+                    Log.d("MainActivity",addresses.get(0).featureName + "," + addresses.get(0).locality +"," + addresses.get(0).adminArea + "," + addresses.get(0).countryName);
+                    return locationAddress
+                }
+            }
+        }
+        catch (e: java.lang.Exception){
+            Log.d("MainAcitivity", "Caught ya")
+        }
+        return ""
+
     }
 
     @SuppressLint("MissingPermission")
@@ -109,6 +138,7 @@ class MainActivity : AppCompatActivity() {
                 if (localNetworkLocation != null)
                     locationNetwork = localNetworkLocation
             }
+
             return locationGps!!.latitude.toString() + ", " + locationGps!!.longitude
         } else {
             startActivity(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS))
@@ -154,10 +184,10 @@ class MainActivity : AppCompatActivity() {
     /*
      * ENTER button clicked
      */
-    private fun handleInserts(username:String, location:String) {
+    private fun handleInserts(username:String) {
         insertBtn.setOnClickListener {
             try {
-                dbImages.insertData(username,location, urlTxt.text.toString(), captionTxt.text.toString())
+                dbImages.insertData(username,getLocationAddress(), urlTxt.text.toString(), captionTxt.text.toString())
                 clearEditTexts()
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -175,54 +205,6 @@ class MainActivity : AppCompatActivity() {
         return allSuccess
     }
 
-    /*
-     * UPDATE button clicked
-     */
-    /* private fun handleUpdates() {
-         updateBtn.setOnClickListener {
-             try {
-                 val isUpdate = dbHelper.updateData(
-                     idTxt.text.toString(),
-                     userTxt.text.toString(),
-                     passTxt.text.toString(),
-                     locationTxt.text.toString(),
-                     urlTxt.text.toString())
-                 if (isUpdate)
-                     showToast("Data Updated Successfully")
-                 else
-                     showToast("Data Not Updated")
-             } catch (e: Exception){
-                 e.printStackTrace()
-                 showToast(e.message.toString())
-             }
-         }
-     }
 
-
-
-     /*
-      * VIEW button clicked
-      */
-     private fun handleViewing() {
-         viewBtn.setOnClickListener(
-             View.OnClickListener {
-                 val res = dbHelper.allData
-                 if (res.isEmpty()) {
-                     showDialog("Error", "No Data Found")
-                     return@OnClickListener
-                 }
-
-                 val buffer = StringBuffer()
-                 for (i in res.indices) {
-                     buffer.append("ID :" + res[i].userID + "\n")
-                     buffer.append("USER :" + res[i].userName + "\n")
-                     buffer.append("PASS :" + res[i].userPass + "\n")
-                     buffer.append("LOCATION :" + res[i].userLocation + "\n")
-                     buffer.append("URL :" + res[i].userURL + "\n\n")
-                 }
-                 showDialog("Data Listing", buffer.toString())
-             }
-         )
-     }*/
 }
 

@@ -3,17 +3,13 @@ package com.example.snrproject
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.content.Intent
-import android.view.Gravity
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
-import coil.api.load
 import kotlinx.android.synthetic.main.activity_login_page.*
 import java.security.MessageDigest
 
 class LoginActivity : AppCompatActivity() {
 
-    internal var dbUsers = DatabaseHelper(this)
+    internal var dbUsers = UserDatabase(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
