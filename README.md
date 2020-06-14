@@ -8,8 +8,8 @@ Pin-It is an image sharing service application based designed for Android device
 
 For the purpose of this application, aside from the log-in data, 3 entries were set up for the users: location, url, and the caption. 
 
+Example user entry
 ![Example user entry](/images/posts.png)
 
 
-![User Login Data](/images/users.png)
 
