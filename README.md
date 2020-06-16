@@ -2,8 +2,8 @@
 
 Pin-It is an image sharing service application based designed for Android devices. With its name in mind, the purpose is to commemorate the alluring locations users have visited and “Pin” them for others to see and potentially experience. Experience it, Pin-It.
 
-###Tools
--*Kotlin, Android Studio, SQLite*
+### Tools
+- *Kotlin, Android Studio, SQLite*
 
 ## Backend
 ### SQLite CRUD Database
